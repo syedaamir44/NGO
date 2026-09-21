@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #fbf7ef;
+    color: #12403a;
+    -webkit-tap-highlight-color: rgba(18, 64, 58, 0.12);
+  }
+
+  /* iOS Safari zooms any input under 16px on focus — never let that happen. */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+@layer components {
+  /* ---- Hero backdrop ------------------------------------------------- */
+  /* The ruled lines drift upward almost imperceptibly — one line's worth
+     over a minute — so the hero is not completely static. */
+  @keyframes eif-rule-drift {
+    from {
+      background-position-y: 0;
+    }
+    to {
+      background-position-y: -38px;
+    }
+  }
+
+  .eif-rules {
+    animation: eif-rule-drift 60s linear infinite;
+  }
+
+  /* ---- The awards / sponsorship tables ------------------------------ */
+  /* Below md each row collapses into a labelled stack via data-label. */
+  .eif-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fbf7ef;
+    border: 1px solid #dcd1bc;
+    display: block;
+  }
+  .eif-table thead {
+    display: none;
+  }
+  .eif-table tbody,
+  .eif-table tr {
+    display: block;
+    width: 100%;
+  }
+  .eif-table tr {
+    border-bottom: 1px solid #dcd1bc;
+    padding: 14px 0;
+  }
+  .eif-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+  .eif-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
+    padding: 6px 18px;
+    border: 0;
+    text-align: right;
+  }
+  .eif-table td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #615c52;
+    padding-top: 4px;
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .eif-table {
+      display: table;
+    }
+    .eif-table thead {
+      display: table-header-group;
+    }
+    .eif-table tbody {
+      display: table-row-group;
+    }
+    .eif-table tr {
+      display: table-row;
+      padding: 0;
+      border-bottom: 0;
+    }
+    .eif-table td {
+      display: table-cell;
+      text-align: left;
+      padding: 18px 20px;
+      border-bottom: 1px solid #dcd1bc;
+      vertical-align: middle;
+    }
+    .eif-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+    .eif-table td::before {
+      display: none;
+    }
+    .eif-table thead th {
+      display: table-cell;
+    }
+  }
+
+  .eif-table thead th {
+    background: #12403a;
+    color: #fbf7ef;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    padding: 15px 18px;
+    text-align: left;
+  }
+
+  /* ---- FAQ accordions ----------------------------------------------- */
+  .eif-faq summary {
+    list-style: none;
+  }
+  .eif-faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .eif-faq summary::after {
+    content: '+';
+    color: #c8811a;
+    font-size: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .eif-faq[open] summary::after {
+    content: '–';
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
