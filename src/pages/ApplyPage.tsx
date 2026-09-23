@@ -115,6 +115,9 @@ export default function ApplyPage() {
                     name="Aadhaar number"
                     label="Aadhaar number"
                     required
+                    numeric
+                    maxLength={12}
+                    rule="aadhaar"
                     placeholder="12-digit number"
                     hint="Exactly as printed on your Aadhaar card, without spaces"
                   />
@@ -123,6 +126,9 @@ export default function ApplyPage() {
                     label="Mobile number"
                     type="tel"
                     required
+                    numeric
+                    maxLength={10}
+                    rule="mobile"
                     autoComplete="tel"
                     placeholder="10-digit number"
                     hint="WhatsApp enabled if possible — the interview call comes here"
@@ -172,6 +178,9 @@ export default function ApplyPage() {
                     name="PIN code"
                     label="PIN code"
                     required
+                    numeric
+                    maxLength={6}
+                    rule="pin"
                     placeholder="e.g. 560001"
                     hint="6-digit postal code"
                   />
@@ -212,9 +221,14 @@ export default function ApplyPage() {
                   <TextField
                     name="Class 11 percentage"
                     label="Class 11 percentage"
+                    type="number"
+                    min={0}
+                    max={100}
+                    step="0.01"
+                    rule="percentage"
                     required
-                    placeholder="e.g. 72%"
-                    hint="Minimum 60% is required to be shortlisted"
+                    placeholder="e.g. 72"
+                    hint="Enter the number only, without the % sign. Minimum 60% to be shortlisted."
                   />
                   <TextField
                     full
@@ -226,6 +240,9 @@ export default function ApplyPage() {
                     name="Class 10 year of passing"
                     label="Year of passing class 10"
                     required
+                    numeric
+                    maxLength={4}
+                    rule="year"
                     placeholder="e.g. 2024"
                   />
                   <TextField
@@ -237,8 +254,14 @@ export default function ApplyPage() {
                   <TextField
                     name="Class 10 percentage"
                     label="Class 10 percentage"
+                    type="number"
+                    min={0}
+                    max={100}
+                    step="0.01"
+                    rule="percentage"
                     required
-                    placeholder="e.g. 84%"
+                    placeholder="e.g. 84"
+                    hint="Enter the number only, without the % sign"
                   />
                 </Grid2>
               </Fieldset>
@@ -254,6 +277,7 @@ export default function ApplyPage() {
                     label="Admission fee"
                     type="number"
                     min={0}
+                    rule="amount"
                     required
                     placeholder="e.g. 12000"
                   />
@@ -262,6 +286,7 @@ export default function ApplyPage() {
                     label="Tuition fee"
                     type="number"
                     min={0}
+                    rule="amount"
                     required
                     placeholder="e.g. 24000"
                     hint="For the full academic year"
@@ -328,6 +353,7 @@ export default function ApplyPage() {
                     label="Annual family income"
                     type="number"
                     min={0}
+                    rule="amount"
                     required
                     placeholder="e.g. 180000"
                     hint="Enter the amount in rupees, as stated on your income certificate. Applications above ₹8,00,000 cannot be shortlisted for this programme."
@@ -351,11 +377,16 @@ export default function ApplyPage() {
                   <TextField
                     name="Bank account number"
                     label="Account number"
+                    numeric
+                    maxLength={18}
+                    rule="account"
                     hint="The account must be in the student’s own name"
                   />
                   <TextField
                     name="IFSC code"
                     label="IFSC code"
+                    maxLength={11}
+                    rule="ifsc"
                     placeholder="e.g. SBIN0001234"
                     style={{ textTransform: 'uppercase' }}
                   />
@@ -385,8 +416,13 @@ export default function ApplyPage() {
                   <TextField
                     name="Percentage of disability"
                     label="Percentage of disability"
-                    placeholder="e.g. 40%"
-                    hint="As stated on your disability certificate"
+                    type="number"
+                    min={0}
+                    max={100}
+                    step="0.01"
+                    rule="percentage"
+                    placeholder="e.g. 40"
+                    hint="Number only, as stated on your disability certificate"
                   />
                 </Grid2>
                 <TextAreaField

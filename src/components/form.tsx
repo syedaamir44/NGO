@@ -89,6 +89,17 @@ function FieldLabel({ htmlFor, children, required, hint }: { htmlFor?: string; c
   )
 }
 
+/** Named validation rules, checked in validateField. */
+export type FieldRule =
+  | 'aadhaar'
+  | 'mobile'
+  | 'pin'
+  | 'ifsc'
+  | 'account'
+  | 'percentage'
+  | 'year'
+  | 'amount'
+
 export function TextField({
   name,
   label,
@@ -99,15 +110,39 @@ export function TextField({
   placeholder,
   autoComplete,
   min,
+  max,
+  step,
   style,
+  numeric,
+  maxLength,
+  rule,
+  inputMode,
 }: BaseProps & {
   type?: 'text' | 'email' | 'tel' | 'number' | 'date'
   placeholder?: string
   autoComplete?: string
   min?: number
+  max?: number
+  step?: number | string
   style?: React.CSSProperties
+  /** Restrict typing to digits only (also caps at maxLength). */
+  numeric?: boolean
+  maxLength?: number
+  /** A named validation rule applied on submit. */
+  rule?: FieldRule
+  inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email'
 }) {
   const id = `f-${name.replace(/\W+/g, '-').toLowerCase()}`
+  // Keep a digits-only field digits-only as the person types, and enforce the
+  // length cap on paste as well as on keystroke.
+  const filterDigits = numeric
+    ? (e: React.FormEvent<HTMLInputElement>) => {
+        const el = e.currentTarget
+        let v = el.value.replace(/\D+/g, '')
+        if (maxLength) v = v.slice(0, maxLength)
+        if (v !== el.value) el.value = v
+      }
+    : undefined
   return (
     <FieldShell full={full}>
       <FieldLabel htmlFor={id} required={required} hint={hint}>
@@ -121,6 +156,12 @@ export function TextField({
         placeholder={placeholder}
         autoComplete={autoComplete}
         min={min}
+        max={max}
+        step={step}
+        maxLength={numeric ? undefined : maxLength}
+        inputMode={inputMode || (numeric ? 'numeric' : undefined)}
+        onInput={filterDigits}
+        data-rule={rule}
         style={style}
         className={CONTROL}
       />
@@ -386,15 +427,50 @@ function validateField(field: Element): boolean {
   if (!value) return true
 
   if (control instanceof HTMLInputElement) {
-    if (control.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-      showError(field, 'Please enter a valid email address.')
+    const bad = (m: string) => {
+      showError(field, m)
       return false
     }
-    if (control.type === 'tel') {
-      const digits = value.replace(/\D/g, '')
-      if (digits.length < 10 || digits.length > 12) {
-        showError(field, 'Please enter a valid 10-digit mobile number.')
-        return false
+
+    if (control.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+      return bad('Please enter a valid email address.')
+    }
+
+    switch (control.dataset.rule) {
+      case 'mobile':
+        if (!/^\d{10}$/.test(value)) return bad('Enter a 10-digit mobile number — digits only.')
+        if (!/^[6-9]/.test(value)) return bad('An Indian mobile number starts with 6, 7, 8 or 9.')
+        break
+      case 'aadhaar':
+        if (!/^\d{12}$/.test(value)) return bad('Enter the 12-digit Aadhaar number — digits only.')
+        break
+      case 'pin':
+        if (!/^\d{6}$/.test(value)) return bad('Enter a 6-digit PIN code.')
+        break
+      case 'account':
+        if (!/^\d{9,18}$/.test(value)) return bad('Enter a valid account number (9–18 digits).')
+        break
+      case 'ifsc':
+        if (!/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/.test(value))
+          return bad('Enter a valid IFSC code, e.g. SBIN0001234.')
+        break
+      case 'year': {
+        const now = new Date().getFullYear()
+        const y = Number(value)
+        if (!/^\d{4}$/.test(value) || y < 1990 || y > now)
+          return bad(`Enter a 4-digit year between 1990 and ${now}.`)
+        break
+      }
+      case 'percentage': {
+        const n = Number(value)
+        if (Number.isNaN(n) || n < 0 || n > 100)
+          return bad('Enter a percentage between 0 and 100.')
+        break
+      }
+      case 'amount': {
+        const n = Number(value)
+        if (Number.isNaN(n) || n < 0) return bad('Enter an amount in rupees (0 or more).')
+        break
       }
     }
   }
