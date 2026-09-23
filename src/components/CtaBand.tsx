@@ -8,7 +8,7 @@ export default function CtaBand() {
         {PROGRAMME.name} is open for applications
       </h2>
       <div className="mt-6">
-        <Button href="#/apply" variant="ink">
+        <Button href="/apply" variant="ink">
           Apply Now →
         </Button>
       </div>

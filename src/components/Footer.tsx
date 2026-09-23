@@ -32,11 +32,11 @@ export default function Footer() {
 
           <div>
             <h4 className="font-serif text-[1.02rem] text-white mb-2">What we do</h4>
-            <a href="#/scholarship" className={LINK}>
+            <a href="/scholarship" className={LINK}>
               Merit Scholarship
             </a>
             {SERVICES.map((s) => (
-              <a key={s.key} href={`#/${s.key}`} className={LINK}>
+              <a key={s.key} href={`/${s.key}`} className={LINK}>
                 {s.name}
               </a>
             ))}
@@ -44,19 +44,19 @@ export default function Footer() {
 
           <div>
             <h4 className="font-serif text-[1.02rem] text-white mb-2">Get involved</h4>
-            <a href="#/apply" className={LINK}>
+            <a href="/apply" className={LINK}>
               Apply for a scholarship
             </a>
-            <a href="#/request" className={LINK}>
+            <a href="/request" className={LINK}>
               Request a session
             </a>
-            <a href="#/partner" className={LINK}>
+            <a href="/partner" className={LINK}>
               Partner institutions
             </a>
-            <a href="#/sponsor" className={LINK}>
+            <a href="/sponsor" className={LINK}>
               Donate
             </a>
-            <a href="#/about" className={LINK}>
+            <a href="/about" className={LINK}>
               About us
             </a>
           </div>

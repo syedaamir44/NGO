@@ -8,7 +8,7 @@ const BLOCKS = [
       'Institutions whose students are selected as scholars are recognised publicly and invited to our annual ceremony.',
     ],
     cta: 'Become a partner institution →',
-    href: '#/partner',
+    href: '/partner',
   },
   {
     title: 'For NGOs and other organisations',
@@ -17,7 +17,7 @@ const BLOCKS = [
       'Refer them to us and we will assess them properly. We are also glad to work the other way round, and to point students towards what your organisation does when it fits them better than anything we offer.',
     ],
     cta: 'Refer students to us →',
-    href: '#/partner',
+    href: '/partner',
   },
   {
     title: 'For donors and CSR partners',
@@ -26,7 +26,7 @@ const BLOCKS = [
       'Sponsoring a counselling session or a skill course costs a fraction of a scholarship and often changes a student’s direction just as decisively. We publish our accounts every year.',
     ],
     cta: 'Support a student →',
-    href: '#/sponsor',
+    href: '/sponsor',
   },
 ]
 

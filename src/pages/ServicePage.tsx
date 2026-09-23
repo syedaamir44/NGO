@@ -57,7 +57,7 @@ export default function ServicePage({ serviceKey }: { serviceKey: ServiceKey }) 
         </ul>
 
         <div className="mt-8">
-          <Button href="#/request" variant="ink">
+          <Button href="/request" variant="ink">
             Request a session →
           </Button>
         </div>
@@ -146,7 +146,7 @@ export default function ServicePage({ serviceKey }: { serviceKey: ServiceKey }) 
           {others.map((o) => (
             <a
               key={o.key}
-              href={`#/${o.key}`}
+              href={`/${o.key}`}
               className="group bg-sand hover:bg-sand-hover transition-colors duration-200 px-5 py-4"
             >
               <span className="block text-marigold text-sm">{o.index}</span>
@@ -166,7 +166,7 @@ export default function ServicePage({ serviceKey }: { serviceKey: ServiceKey }) 
           involved, and what it costs, before anything is arranged.
         </p>
         <div className="mt-6">
-          <Button href="#/request" variant="ink">
+          <Button href="/request" variant="ink">
             Request a session →
           </Button>
         </div>

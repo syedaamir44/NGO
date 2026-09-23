@@ -6,7 +6,7 @@ const CARDS = [
   {
     index: '01',
     name: 'Merit Scholarship',
-    href: '#/scholarship',
+    href: '/scholarship',
     teaser:
       'Direct financial support for meritorious students from low-income families, paid when college fees actually fall due.',
     highlight: true,
@@ -14,7 +14,7 @@ const CARDS = [
   ...SERVICES.map((s) => ({
     index: s.index,
     name: s.name,
-    href: `#/${s.key}`,
+    href: `/${s.key}`,
     teaser: s.teaser,
     highlight: false,
   })),

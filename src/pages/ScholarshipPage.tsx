@@ -181,7 +181,7 @@ export default function ScholarshipPage() {
               ))}
             </dl>
             <div className="mt-5">
-              <Button href="#/apply" variant="ink" className="w-full">
+              <Button href="/apply" variant="ink" className="w-full">
                 Apply Now →
               </Button>
             </div>
@@ -245,7 +245,7 @@ export default function ScholarshipPage() {
         </div>
 
         <div className="mt-8">
-          <Button href="#/apply" variant="ink">
+          <Button href="/apply" variant="ink">
             Apply Now →
           </Button>
         </div>
@@ -354,7 +354,7 @@ export default function ScholarshipPage() {
           Applying costs nothing and takes about twenty minutes once your documents are ready.
         </p>
         <div className="mt-6">
-          <Button href="#/apply" variant="ink">
+          <Button href="/apply" variant="ink">
             Apply Now →
           </Button>
         </div>

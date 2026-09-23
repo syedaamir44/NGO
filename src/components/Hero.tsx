@@ -38,10 +38,10 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          <Button href="#/apply" variant="ink">
+          <Button href="/apply" variant="ink">
             Apply for the scholarship →
           </Button>
-          <Button href="#/request" variant="outline">
+          <Button href="/request" variant="outline">
             Request counselling
           </Button>
         </div>

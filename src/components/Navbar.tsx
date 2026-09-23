@@ -5,8 +5,8 @@ import { SERVICES } from '../data/services'
 import type { PageName } from '../lib/useHashRoute'
 
 const SERVICE_LINKS = [
-  { label: 'Merit Scholarship', href: '#/scholarship' },
-  ...SERVICES.map((s) => ({ label: s.name, href: `#/${s.key}` })),
+  { label: 'Merit Scholarship', href: '/scholarship' },
+  ...SERVICES.map((s) => ({ label: s.name, href: `/${s.key}` })),
 ]
 
 export default function Navbar({ page }: { page: PageName }) {
@@ -54,7 +54,7 @@ export default function Navbar({ page }: { page: PageName }) {
       ].join(' ')}
     >
       <div className="px-6 sm:px-10 md:px-14 py-4 sm:py-5 flex items-center justify-between gap-4">
-        <a href="#/home" className="flex items-center gap-2.5 shrink-0" onClick={() => setOpen(false)}>
+        <a href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setOpen(false)}>
           <Logo className="w-6 h-6 text-marigold" />
           <span className="flex flex-col leading-none">
             <span className="font-serif text-base tracking-tight text-ink">Shikshasarathi</span>
@@ -94,19 +94,19 @@ export default function Navbar({ page }: { page: PageName }) {
             )}
           </div>
           <a
-            href="#/about"
+            href="/about"
             className="text-sm text-ink/70 hover:text-ink transition-colors duration-200"
           >
             About us
           </a>
           <a
-            href="#/partner"
+            href="/partner"
             className="text-sm text-ink/70 hover:text-ink transition-colors duration-200"
           >
             For institutions
           </a>
           <a
-            href="#/sponsor"
+            href="/sponsor"
             className="text-sm text-ink/70 hover:text-ink transition-colors duration-200"
           >
             Donate
@@ -115,7 +115,7 @@ export default function Navbar({ page }: { page: PageName }) {
 
         <div className="flex items-center gap-2">
           <a
-            href="#/apply"
+            href="/apply"
             className="hidden sm:inline-flex px-5 py-2.5 bg-ink text-cream text-sm font-medium rounded-lg hover:bg-ink-deep transition-colors duration-200"
           >
             Apply Now
@@ -161,9 +161,9 @@ export default function Navbar({ page }: { page: PageName }) {
             </a>
           ))}
           {[
-            { label: 'About us', href: '#/about' },
-            { label: 'For institutions', href: '#/partner' },
-            { label: 'Donate', href: '#/sponsor' },
+            { label: 'About us', href: '/about' },
+            { label: 'For institutions', href: '/partner' },
+            { label: 'Donate', href: '/sponsor' },
           ].map((l) => (
             <a
               key={l.href}
@@ -175,7 +175,7 @@ export default function Navbar({ page }: { page: PageName }) {
             </a>
           ))}
           <a
-            href="#/apply"
+            href="/apply"
             onClick={() => setOpen(false)}
             className="mt-3 flex items-center justify-center min-h-[52px] bg-marigold text-[#241703] font-semibold rounded-lg"
           >

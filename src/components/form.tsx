@@ -20,7 +20,7 @@ export function PageHeader({
     <header className="bg-ink text-[#E7DECC] pt-28 pb-12 sm:pt-32 sm:pb-14">
       <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14">
         <div className="text-[0.82rem] text-[#A9BDB7] mb-4">
-          <a href="#/home" className="border-b border-white/20 pb-1 hover:text-white transition-colors duration-200">
+          <a href="/" className="border-b border-white/20 pb-1 hover:text-white transition-colors duration-200">
             Home
           </a>
           <span className="mx-2">/</span>
@@ -329,7 +329,7 @@ export function SuccessPanel({
       )}
       <div className="mt-6">
         <a
-          href="#/home"
+          href="/"
           className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg border border-ink text-ink hover:bg-ink hover:text-cream transition-colors duration-200"
         >
           ← Back to home

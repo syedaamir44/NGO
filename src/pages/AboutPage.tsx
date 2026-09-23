@@ -6,27 +6,27 @@ const WHAT_WE_DO = [
   {
     title: 'Merit Scholarship',
     body: `Direct financial support for meritorious students from low-income families, paid when college fees actually fall due. Our current programme is the ${PROGRAMME.name}, open to students in class 12. The Foundation funds and awards these scholarships itself.`,
-    href: '#/scholarship',
+    href: '/scholarship',
   },
   {
     title: 'Education counselling',
     body: 'Which stream after class 10, which course after class 12, which colleges are genuinely within reach, what each option costs, and what has to be done by when.',
-    href: '#/education-counselling',
+    href: '/education-counselling',
   },
   {
     title: 'Career counselling',
     body: 'What a job actually involves day to day, what it pays at the start, what qualifications it truly requires, and what to do when the first plan does not work.',
-    href: '#/career-counselling',
+    href: '/career-counselling',
   },
   {
     title: 'Competitive exam guidance',
     body: 'Which examination suits a particular student — CET, NEET, JEE, banking, SSC, railways, state services — and how to prepare sensibly, including how much of the preparation costs nothing at all.',
-    href: '#/exam-guidance',
+    href: '/exam-guidance',
   },
   {
     title: 'Add-on skill courses',
     body: 'Short courses alongside your bachelor’s degree that lead to real work, which government and subsidised programmes are worth knowing about, and how to tell a genuine institute from one selling a worthless certificate.',
-    href: '#/skill-courses',
+    href: '/skill-courses',
   },
 ]
 
@@ -66,19 +66,19 @@ const GET_INVOLVED = [
     title: 'Students',
     body: 'Apply for the scholarship if the fees are what stands in your way, or send us a request if you simply do not know what to do next. Both cost nothing to ask.',
     cta: 'Apply for the scholarship →',
-    href: '#/apply',
+    href: '/apply',
   },
   {
     title: 'Schools, colleges and NGOs',
     body: 'Partner with us. It costs your organisation nothing, and you are the people who see these students first.',
     cta: 'Become a partner →',
-    href: '#/partner',
+    href: '/partner',
   },
   {
     title: 'Donors and CSR partners',
     body: 'A contribution funds a scholarship for a student who cannot pay the fees, and sponsors guidance for students who cannot meet a partner’s charges. We publish our accounts every year.',
     cta: 'Support a student →',
-    href: '#/sponsor',
+    href: '/sponsor',
   },
 ]
 
