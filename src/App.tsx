@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar'
+import AnnouncementModal from './components/AnnouncementModal'
 import Hero from './components/Hero'
 import ServicesOverview from './components/ServicesOverview'
 import WorkWithUs from './components/WorkWithUs'
@@ -45,6 +46,7 @@ export default function App() {
         {page === 'sponsor' && <SponsorPage />}
       </main>
       <Footer />
+      <AnnouncementModal />
     </div>
   )
 }

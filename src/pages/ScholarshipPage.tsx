@@ -1,19 +1,19 @@
 import { PageHeader } from '../components/form'
 import { Label, Button } from '../components/ui'
-import { PROGRAMME, CONTACT_EMAIL } from '../config'
+import { PROGRAMME, CONTACT_EMAIL, IMPLEMENTATION_PARTNER } from '../config'
 
 const ELIGIBILITY = [
   {
-    title: 'You are in class 12',
-    body: 'The scholarship supports the step from school into college. Only students currently studying in class 12 may apply.',
+    title: 'You are in class 11 or 12',
+    body: 'The scholarship supports the step from school into college. Students currently studying in class 11 or class 12 may apply.',
   },
   {
     title: 'Family income below ₹8 lakh a year',
     body: 'Total annual household income from all sources must be under ₹8,00,000. This is verified from the income proof you submit.',
   },
   {
-    title: 'At least 60% in class 11',
-    body: 'Your class 11 result must show a minimum of 60% (or the equivalent grade or CGPA).',
+    title: 'At least 60% in your last completed year',
+    body: 'Your most recent completed year — class 10 for a class 11 applicant, or class 11 for a class 12 applicant — must show a minimum of 60% (or the equivalent grade or CGPA).',
   },
   {
     title: 'Studying in or domiciled in Karnataka',
@@ -103,7 +103,7 @@ const FAQS: { q: string; a: string; open?: boolean }[] = [
   },
   {
     q: 'Are diploma students eligible to apply?',
-    a: 'No. This scholarship is only for students currently studying in class 12.',
+    a: 'No. This scholarship is for students currently studying in class 11 or class 12.',
   },
   {
     q: 'When will the results be announced?',
@@ -164,9 +164,9 @@ export default function ScholarshipPage() {
             <dl>
               {[
                 ['Application fee', '₹0', 'No charge at any stage'],
-                ['Who may apply', 'Class 12 only', 'All streams'],
+                ['Who may apply', 'Class 11 & 12', 'All streams'],
                 ['Income limit', 'Under ₹8 lakh', 'Total annual family income'],
-                ['Minimum marks', '60%', 'In class 11'],
+                ['Minimum marks', '60%', 'In your last completed year'],
                 ['Region', 'Karnataka', 'Studying in or domiciled'],
               ].map(([k, v, note], i) => (
                 <div key={k} className={`py-3 ${i === 0 ? 'pt-0' : ''} border-b border-line last:border-b-0 last:pb-0`}>
@@ -307,12 +307,34 @@ export default function ScholarshipPage() {
           ))}
         </div>
 
-        <div className="mt-6 bg-[#FDF3DC] border-[1.5px] border-l-[5px] border-[#E0B95E] px-4 py-3.5 text-sm text-[#5C4409] leading-relaxed">
-          <strong className="block mb-1">⚙ Dates to be confirmed</strong>
-          The dates above are placeholders. Set the real ones in{' '}
-          <code className="bg-[#F5E4BC] px-1.5 py-0.5 rounded-[2px]">src/config.ts</code> under{' '}
-          <code className="bg-[#F5E4BC] px-1.5 py-0.5 rounded-[2px]">PROGRAMME</code> before
-          publishing this page.
+        <p className="mt-6 text-sm text-muted leading-relaxed">
+          Applications are accepted only within this window. Submit before the deadline — late
+          applications cannot be considered.
+        </p>
+      </section>
+
+      {/* ---------- Implementation partner ---------- */}
+      <section className="bg-sand py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14">
+          <Label>Implementation partner</Label>
+          <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
+            Who runs the application process
+          </h2>
+          <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
+            The application process for this programme — checking eligibility, guiding students
+            through the form and documents, and supporting them through to the award — is run for
+            the Foundation by{' '}
+            <a
+              href={IMPLEMENTATION_PARTNER.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-forest2 underline underline-offset-2"
+            >
+              {IMPLEMENTATION_PARTNER.name}
+            </a>{' '}
+            and its team. The Foundation funds and awards the scholarships; the process is theirs to
+            run, so every applicant is handled the same way.
+          </p>
         </div>
       </section>
 

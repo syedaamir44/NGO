@@ -482,6 +482,8 @@ export function useEifForm(key: FormKey) {
   const [submitted, setSubmitted] = useState(false)
   const [delivered, setDelivered] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [reference, setReference] = useState<number | null>(null)
+  const [applicantName, setApplicantName] = useState('')
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -506,6 +508,7 @@ export function useEifForm(key: FormKey) {
       const v = String(value)
       data[k] = k in data ? `${data[k]}, ${v}` : v
     })
+    setApplicantName(data['Full name'] || '')
 
     const endpoint = FORM_ENDPOINTS[key]
     let ok = false
@@ -518,6 +521,8 @@ export function useEifForm(key: FormKey) {
         })
         if (!res.ok) throw new Error(`Server returned ${res.status}`)
         ok = true
+        const payload = await res.json().catch(() => null)
+        if (payload && typeof payload.reference === 'number') setReference(payload.reference)
       } catch {
         setBusy(false)
         window.alert(
@@ -542,7 +547,69 @@ export function useEifForm(key: FormKey) {
     if (field) clearError(field)
   }
 
-  return { formRef, submitted, delivered, busy, onSubmit, onInput }
+  return { formRef, submitted, delivered, busy, reference, applicantName, onSubmit, onInput }
+}
+
+/**
+ * A printable receipt shown after a successful scholarship submission. The
+ * student can print it or save it as a PDF (the browser's print dialog) — no
+ * email service required. Print CSS in index.css isolates this block.
+ */
+export function ApplicationReceipt({
+  reference,
+  name,
+  programme,
+}: {
+  reference: number | null
+  name?: string
+  programme: string
+}) {
+  const ref = reference != null ? `SSF/2026/${String(reference).padStart(6, '0')}` : null
+  const submittedOn = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
+  const Row = ({ k, v }: { k: string; v: string }) => (
+    <div className="flex justify-between gap-4 py-2 border-b border-line last:border-b-0">
+      <dt className="text-muted">{k}</dt>
+      <dd className="text-ink-deep text-right">{v}</dd>
+    </div>
+  )
+  return (
+    <div id="app-receipt" className="mt-6 border-[1.5px] border-ink bg-cream rounded-sm overflow-hidden">
+      <div className="bg-ink text-cream px-5 py-4 flex items-center justify-between">
+        <span className="font-serif text-[1.1rem]">Application receipt</span>
+        <span className="text-[0.8rem] text-[#A9BDB7]">Shikshasarathi Foundation</span>
+      </div>
+      <div className="p-5 sm:p-6">
+        {ref ? (
+          <>
+            <div className="text-[0.7rem] uppercase tracking-[0.13em] text-muted">
+              Application number
+            </div>
+            <div className="font-serif text-2xl sm:text-[1.7rem] text-marigold-dark">{ref}</div>
+          </>
+        ) : (
+          <p className="text-sm text-muted leading-relaxed">
+            Your application was recorded. Save or print this page for your reference.
+          </p>
+        )}
+        <dl className="mt-4 text-[15px]">
+          {name && <Row k="Applicant" v={name} />}
+          <Row k="Programme" v={programme} />
+          <Row k="Submitted on" v={submittedOn} />
+        </dl>
+        <p className="mt-4 text-[0.85rem] text-muted leading-relaxed">
+          Keep this receipt and quote the application number in any message to us. No fee is payable
+          at any stage.
+        </p>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="eif-noprint mt-5 inline-flex items-center justify-center px-6 py-3 min-h-[48px] text-sm font-medium rounded-lg border border-ink text-ink hover:bg-ink hover:text-cream transition-colors duration-200"
+        >
+          Print / Save as PDF
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export function SubmitRow({ busy, label, note }: { busy: boolean; label: string; note?: ReactNode }) {

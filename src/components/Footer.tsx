@@ -1,6 +1,6 @@
 import Logo from './Logo'
 import { SERVICES } from '../data/services'
-import { CONTACT_EMAIL, CONTACT_PHONE } from '../config'
+import { CONTACT_EMAIL, CONTACT_PHONE, IMPLEMENTATION_PARTNER } from '../config'
 
 const LINK = 'block py-1.5 text-[#9FB0AB] hover:text-marigold transition-colors duration-200'
 
@@ -63,11 +63,26 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-5 border-t border-[#23453F] text-[0.8rem] text-[#6E827D] leading-relaxed">
-          © 2026 Shikshasarathi Foundation · Bangalore, Karnataka, India. Scholarship amounts, scholar
-          numbers and dates shown are indicative until formally announced. Payment details shown are
-          placeholders pending the Foundation’s registration and bank account. Counselling, exam
-          guidance and skill courses are arranged with partner organisations, which set their own
-          fees; the Foundation receives no commission or referral fee from any of them.
+          <p>
+            Scholarship applications are processed for the Foundation by its implementation partner{' '}
+            <a
+              href={IMPLEMENTATION_PARTNER.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#9FB0AB] hover:text-marigold underline underline-offset-2"
+            >
+              {IMPLEMENTATION_PARTNER.name}
+            </a>
+            .
+          </p>
+          <p className="mt-3">
+            © 2026 Shikshasarathi Foundation · Bangalore, Karnataka, India. Scholarship amounts,
+            scholar numbers and dates shown are indicative until formally announced. Payment details
+            shown are placeholders pending the Foundation’s registration and bank account.
+            Counselling, exam guidance and skill courses are arranged with partner organisations,
+            which set their own fees; the Foundation receives no commission or referral fee from any
+            of them.
+          </p>
         </div>
       </div>
     </footer>

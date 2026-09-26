@@ -66,7 +66,19 @@ export const CONTACT_PHONE = '+91 85498 67440'
 export const PROGRAMME = {
   name: 'All India Merit Scholarship 2026',
   cycle: '2026–27',
-  /* Replace 00/00/2026 with the real dates once the window is fixed. */
-  opens: '00/00/2026',
-  closes: '00/00/2026',
+  opens: '1 October 2026',
+  closes: '10 November 2026',
+  /** Short form used in the announcement bar and receipts. */
+  window: '1 October – 10 November 2026',
+}
+
+/**
+ * Implementation partner — runs the application process for the Foundation:
+ * eligibility assessment, application guidance and support through to the award.
+ */
+export const IMPLEMENTATION_PARTNER = {
+  name: 'ScholarshipBuddy',
+  url: 'https://scholarshipbuddy.in',
+  blurb:
+    'Eligibility assessment, application guidance and claims support are handled for the Foundation by ScholarshipBuddy and its team.',
 }

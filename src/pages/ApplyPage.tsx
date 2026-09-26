@@ -8,6 +8,7 @@ import {
   ChoiceGroup,
   SetupNotice,
   SuccessPanel,
+  ApplicationReceipt,
   SubmitRow,
   Req,
   useEifForm,
@@ -29,7 +30,8 @@ const EDUCATION_LEVELS = [
 const RELIGIONS = ['Hindu', 'Muslim', 'Christian', 'Sikh', 'Buddhist', 'Jain', 'Other']
 
 export default function ApplyPage() {
-  const { formRef, submitted, delivered, busy, onSubmit, onInput } = useEifForm('apply')
+  const { formRef, submitted, delivered, busy, reference, applicantName, onSubmit, onInput } =
+    useEifForm('apply')
 
   return (
     <>
@@ -54,6 +56,11 @@ export default function ApplyPage() {
             ]}
             delivered={delivered}
           >
+            <ApplicationReceipt
+              reference={reference}
+              name={applicantName}
+              programme={PROGRAMME.name}
+            />
             <p className="mt-5 text-[15px] text-muted leading-relaxed">
               Keep the documents listed on the scholarship page ready — verification moves quickly
               once shortlisting is done. Questions in the meantime? Write to{' '}
@@ -193,10 +200,18 @@ export default function ApplyPage() {
                 note="Work backwards from where you are now. Every name, number and percentage should match your marksheets exactly."
               >
                 <Grid2>
+                  <SelectField
+                    full
+                    name="Current class"
+                    label="Which class are you in now?"
+                    required
+                    options={['Class 11', 'Class 12']}
+                    hint="Both class 11 and class 12 students may apply this cycle"
+                  />
                   <TextField
                     full
                     name="Present college"
-                    label="Name of your present college (class 12)"
+                    label="Name of your present college"
                     required
                   />
                   <TextField
@@ -226,9 +241,8 @@ export default function ApplyPage() {
                     max={100}
                     step="0.01"
                     rule="percentage"
-                    required
                     placeholder="e.g. 72"
-                    hint="Enter the number only, without the % sign. Minimum 60% to be shortlisted."
+                    hint="Number only, no % sign. Class 12 applicants: your class 11 result. Class 11 students still in their first year may leave this blank."
                   />
                   <TextField
                     full

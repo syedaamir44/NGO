@@ -164,3 +164,17 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Print only the application receipt when the student prints/saves it. */
+@media print {
+  body * { visibility: hidden !important; }
+  #app-receipt, #app-receipt * { visibility: visible !important; }
+  #app-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: 1.5px solid #12403A;
+  }
+  .eif-noprint { display: none !important; }
+}
