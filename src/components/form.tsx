@@ -516,7 +516,11 @@ export function useEifForm(key: FormKey) {
       try {
         const res = await fetch(endpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          // text/plain keeps this a CORS "simple request", so the browser sends
+          // it directly with no preflight — the most reliable path across mobile
+          // browsers and flaky networks. The Supabase function parses the JSON
+          // body regardless of the content-type header.
+          headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
           body: JSON.stringify(data),
         })
         if (!res.ok) throw new Error(`Server returned ${res.status}`)

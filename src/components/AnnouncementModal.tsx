@@ -40,7 +40,13 @@ export default function AnnouncementModal() {
       if (e.key === 'Escape') close()
     }
     document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+    // Lock background scroll while the modal is open (mobile especially).
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
   }, [open])
 
   if (!open) return null
@@ -53,7 +59,7 @@ export default function AnnouncementModal() {
       aria-labelledby="annc-title"
     >
       <div className="absolute inset-0 bg-ink-deep/60 backdrop-blur-sm" onClick={close} />
-      <div className="relative w-full max-w-md bg-cream border-[1.5px] border-ink rounded-sm shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-cream border-[1.5px] border-ink rounded-sm shadow-2xl">
         <div className="relative bg-ink text-cream px-6 py-5">
           <span className="block text-[11px] uppercase tracking-[0.2em] text-marigold-l">Now open</span>
           <h2 id="annc-title" className="mt-1 font-serif text-xl sm:text-2xl leading-tight">
@@ -63,7 +69,7 @@ export default function AnnouncementModal() {
             type="button"
             aria-label="Close"
             onClick={close}
-            className="absolute right-3 top-3 h-8 w-8 grid place-items-center text-cream/70 hover:text-white text-xl leading-none"
+            className="absolute right-2 top-2 h-11 w-11 grid place-items-center text-cream/70 hover:text-white text-2xl leading-none"
           >
             ×
           </button>
