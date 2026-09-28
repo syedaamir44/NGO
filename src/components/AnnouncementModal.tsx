@@ -77,8 +77,8 @@ export default function AnnouncementModal() {
         <div className="p-6">
           <p className="text-[15px] text-muted leading-relaxed">
             Applications are open{' '}
-            <strong className="text-ink-deep">{PROGRAMME.window}</strong>. Merit scholarships for
-            class 11 and 12 students from low-income families across Karnataka.
+            <strong className="text-ink-deep">{PROGRAMME.window}</strong>. Merit scholarships and
+            free counselling for class 11 and 12 students across Karnataka.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a

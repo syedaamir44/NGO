@@ -1,6 +1,7 @@
 import { useRef, useState, type ReactNode, type FormEvent } from 'react'
-import { FORM_ENDPOINTS, CONTACT_EMAIL, type FormKey } from '../config'
+import { FORM_ENDPOINTS, CONTACT_EMAIL, CONTACT_PHONE, type FormKey } from '../config'
 import { Label } from './ui'
+import Logo from './Logo'
 
 /* ==================================================================
    Page header — the forest band at the top of every inner page
@@ -482,8 +483,8 @@ export function useEifForm(key: FormKey) {
   const [submitted, setSubmitted] = useState(false)
   const [delivered, setDelivered] = useState(false)
   const [busy, setBusy] = useState(false)
-  const [reference, setReference] = useState<number | null>(null)
-  const [applicantName, setApplicantName] = useState('')
+  const [reference, setReference] = useState<string | null>(null)
+  const [submittedData, setSubmittedData] = useState<Record<string, string>>({})
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -508,7 +509,7 @@ export function useEifForm(key: FormKey) {
       const v = String(value)
       data[k] = k in data ? `${data[k]}, ${v}` : v
     })
-    setApplicantName(data['Full name'] || '')
+    setSubmittedData(data)
 
     const endpoint = FORM_ENDPOINTS[key]
     let ok = false
@@ -526,7 +527,7 @@ export function useEifForm(key: FormKey) {
         if (!res.ok) throw new Error(`Server returned ${res.status}`)
         ok = true
         const payload = await res.json().catch(() => null)
-        if (payload && typeof payload.reference === 'number') setReference(payload.reference)
+        if (payload && typeof payload.reference === 'string') setReference(payload.reference)
       } catch {
         setBusy(false)
         window.alert(
@@ -551,66 +552,179 @@ export function useEifForm(key: FormKey) {
     if (field) clearError(field)
   }
 
-  return { formRef, submitted, delivered, busy, reference, applicantName, onSubmit, onInput }
+  return { formRef, submitted, delivered, busy, reference, submittedData, onSubmit, onInput }
 }
 
+/** The application fields, grouped as they appear on the printed acknowledgment. */
+const ACK_GROUPS: { title: string; fields: string[] }[] = [
+  {
+    title: 'Student details',
+    fields: [
+      'Full name', 'Current class', 'Date of birth', 'Gender', 'Religion', 'Category',
+      'Aadhaar number', 'Mobile number', 'Email', 'Karnataka connection',
+    ],
+  },
+  { title: 'Address', fields: ['Address', 'City or town', 'District', 'State', 'PIN code'] },
+  {
+    title: 'Academic details',
+    fields: [
+      'Present college', 'Board of class 12', 'Stream', 'Class 11 college', 'Class 11 percentage',
+      'Class 10 school', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
+    ],
+  },
+  { title: 'Fees', fields: ['Admission fee', 'Tuition fee'] },
+  {
+    title: 'Family & financial details',
+    fields: [
+      "Father's name", "Father's education qualification", "Father's occupation",
+      "Mother's name", "Mother's education qualification", "Mother's occupation",
+      'Guardian name and details', 'Annual family income', 'Dependents',
+    ],
+  },
+  { title: 'Bank account', fields: ['Bank account number', 'IFSC code', 'Bank branch', 'Bank name'] },
+  {
+    title: 'Additional information',
+    fields: ['Disability', 'Type of disability', 'Percentage of disability', 'Co-curricular activities'],
+  },
+  {
+    title: 'Your situation',
+    fields: ['Why you need this scholarship', 'What you want to study', 'Also interested in'],
+  },
+]
+
+const LONG_FIELDS = new Set([
+  'Address', 'Guardian name and details', 'Co-curricular activities',
+  'Why you need this scholarship', 'What you want to study',
+])
+
 /**
- * A printable receipt shown after a successful scholarship submission. The
- * student can print it or save it as a PDF (the browser's print dialog) — no
- * email service required. Print CSS in index.css isolates this block.
+ * The printable application acknowledgment. Lays out the whole submission with
+ * its application ID and submission time, styled to print cleanly on paper or
+ * save as a PDF from the browser's print dialog — no email service required.
+ * Print CSS in index.css isolates this block (#app-receipt).
  */
 export function ApplicationReceipt({
   reference,
-  name,
+  data,
   programme,
 }: {
-  reference: number | null
-  name?: string
+  reference: string | null
+  data: Record<string, string>
   programme: string
 }) {
-  const ref = reference != null ? `SSF/2026/${String(reference).padStart(6, '0')}` : null
   const submittedOn = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
-  const Row = ({ k, v }: { k: string; v: string }) => (
-    <div className="flex justify-between gap-4 py-2 border-b border-line last:border-b-0">
-      <dt className="text-muted">{k}</dt>
-      <dd className="text-ink-deep text-right">{v}</dd>
-    </div>
-  )
-  return (
-    <div id="app-receipt" className="mt-6 border-[1.5px] border-ink bg-cream rounded-sm overflow-hidden">
-      <div className="bg-ink text-cream px-5 py-4 flex items-center justify-between">
-        <span className="font-serif text-[1.1rem]">Application receipt</span>
-        <span className="text-[0.8rem] text-[#A9BDB7]">Shikshasarathi Foundation</span>
+  const has = (k: string) => (data[k] || '').trim().length > 0
+
+  const FieldRow = ({ k }: { k: string }) => {
+    const long = LONG_FIELDS.has(k)
+    return (
+      <div
+        className={`border-b border-line last:border-b-0 py-2 ${
+          long ? '' : 'sm:grid sm:grid-cols-[40%_1fr] sm:gap-4'
+        }`}
+      >
+        <div className="text-[0.8rem] uppercase tracking-[0.06em] text-muted">{k}</div>
+        <div className={`text-[15px] text-ink-deep ${long ? 'mt-1' : ''}`}>{data[k]}</div>
       </div>
-      <div className="p-5 sm:p-6">
-        {ref ? (
-          <>
-            <div className="text-[0.7rem] uppercase tracking-[0.13em] text-muted">
-              Application number
+    )
+  }
+
+  return (
+    <div id="app-receipt" className="mt-6 border-[1.5px] border-ink bg-white">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4 px-5 sm:px-7 py-5 border-b-2 border-ink">
+        <div className="flex items-center gap-3">
+          <Logo className="w-9 h-9 text-marigold shrink-0" />
+          <div>
+            <div className="font-serif text-[1.15rem] leading-tight text-ink-deep">
+              Shikshasarathi Foundation
             </div>
-            <div className="font-serif text-2xl sm:text-[1.7rem] text-marigold-dark">{ref}</div>
-          </>
-        ) : (
-          <p className="text-sm text-muted leading-relaxed">
-            Your application was recorded. Save or print this page for your reference.
+            <div className="text-[0.78rem] text-muted leading-snug">
+              Bangalore, Karnataka · {CONTACT_EMAIL} · {CONTACT_PHONE}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-5 sm:px-7 py-5">
+        <div className="text-center font-serif text-[1.15rem] text-ink-deep">
+          {programme} — Application Acknowledgment
+        </div>
+
+        {/* ID + submitted-on */}
+        <div className="mt-4 grid sm:grid-cols-2 border-[1.5px] border-ink">
+          <div className="px-4 py-3 border-b sm:border-b-0 sm:border-r border-ink">
+            <div className="text-[0.7rem] uppercase tracking-[0.13em] text-muted">Application ID</div>
+            <div className="font-serif text-[1.3rem] text-marigold-dark break-all">
+              {reference || 'Recorded — reference will be emailed'}
+            </div>
+          </div>
+          <div className="px-4 py-3">
+            <div className="text-[0.7rem] uppercase tracking-[0.13em] text-muted">Submitted on</div>
+            <div className="text-[15px] text-ink-deep mt-1">{submittedOn}</div>
+          </div>
+        </div>
+
+        <p className="mt-4 text-[14px] text-muted leading-relaxed">
+          Dear {data['Full name'] || 'Applicant'}, your application has been received. Keep this
+          acknowledgment for your records and quote the Application ID in any message to us.
+          Shortlisting and next steps will be sent to your registered email and mobile. No fee is
+          payable at any stage.
+        </p>
+
+        {/* Office use */}
+        <div className="mt-4 border border-line">
+          <div className="text-[0.7rem] uppercase tracking-[0.12em] text-muted px-3 pt-2">
+            For office use
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4">
+            {['Received by', 'Verified by', 'Approved by', 'Status'].map((k) => (
+              <div key={k} className="px-3 py-3 border-t border-line sm:border-t-0 sm:border-l first:border-l-0">
+                <div className="text-[0.72rem] text-muted">{k}</div>
+                <div className="h-5" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Detail groups */}
+        {ACK_GROUPS.map((g) => {
+          const rows = g.fields.filter(has)
+          if (rows.length === 0) return null
+          return (
+            <div key={g.title} className="mt-5">
+              <div className="font-serif text-[1.02rem] text-ink-deep border-b-2 border-ink pb-1.5">
+                {g.title}
+              </div>
+              <div className="mt-1">
+                {rows.map((k) => (
+                  <FieldRow key={k} k={k} />
+                ))}
+              </div>
+            </div>
+          )
+        })}
+
+        {has('Declaration') && (
+          <p className="mt-5 text-[13px] text-muted leading-relaxed border-t border-line pt-3">
+            Declaration confirmed: the applicant has certified that the details are true and
+            understands that applying is free and that false information disqualifies the
+            application.
           </p>
         )}
-        <dl className="mt-4 text-[15px]">
-          {name && <Row k="Applicant" v={name} />}
-          <Row k="Programme" v={programme} />
-          <Row k="Submitted on" v={submittedOn} />
-        </dl>
-        <p className="mt-4 text-[0.85rem] text-muted leading-relaxed">
-          Keep this receipt and quote the application number in any message to us. No fee is payable
-          at any stage.
-        </p>
-        <button
-          type="button"
-          onClick={() => window.print()}
-          className="eif-noprint mt-5 inline-flex items-center justify-center px-6 py-3 min-h-[48px] text-sm font-medium rounded-lg border border-ink text-ink hover:bg-ink hover:text-cream transition-colors duration-200"
-        >
-          Print / Save as PDF
-        </button>
+
+        <div className="eif-noprint mt-6 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="inline-flex items-center justify-center px-6 py-3 min-h-[48px] text-sm font-medium rounded-lg bg-ink text-cream hover:bg-ink-deep transition-colors duration-200"
+          >
+            Download / Print acknowledgment
+          </button>
+          <span className="self-center text-[0.8rem] text-muted">
+            Use “Save as PDF” in the print dialog to keep a copy.
+          </span>
+        </div>
       </div>
     </div>
   )

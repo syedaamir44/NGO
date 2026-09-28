@@ -30,7 +30,7 @@ const EDUCATION_LEVELS = [
 const RELIGIONS = ['Hindu', 'Muslim', 'Christian', 'Sikh', 'Buddhist', 'Jain', 'Other']
 
 export default function ApplyPage() {
-  const { formRef, submitted, delivered, busy, reference, applicantName, onSubmit, onInput } =
+  const { formRef, submitted, delivered, busy, reference, submittedData, onSubmit, onInput } =
     useEifForm('apply')
 
   return (
@@ -58,7 +58,7 @@ export default function ApplyPage() {
           >
             <ApplicationReceipt
               reference={reference}
-              name={applicantName}
+              data={submittedData}
               programme={PROGRAMME.name}
             />
             <p className="mt-5 text-[15px] text-muted leading-relaxed">
