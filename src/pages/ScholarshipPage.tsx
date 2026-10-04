@@ -83,6 +83,37 @@ const DOCUMENTS = [
   },
 ]
 
+const AWARD = [
+  {
+    k: 'Scholarship amount',
+    v: '₹5,000 – ₹20,000',
+    note: 'Per year. The exact amount for each scholar is set by the selection committee.',
+  },
+  {
+    k: 'Duration',
+    v: 'Full course',
+    note: 'Paid for the entire duration of the course, subject to meeting the renewal conditions each year.',
+  },
+  {
+    k: 'How it is paid',
+    v: 'Bank transfer',
+    note: 'By NEFT into the scholar’s own account. First instalment on 1 January 2027, second on 1 May 2027.',
+  },
+]
+
+const TERMS = [
+  'Selection is on merit — the percentage of marks obtained, and an interview where applicable.',
+  'If two candidates tie on marks, the one with the lower family income is preferred. If both are still tied, a financial assessment by the Foundation decides.',
+  'As a rule, only one student per family receives the scholarship. This may be relaxed to two if the later applicant is female, or if both applicants are female.',
+  'Candidates must submit an income certificate from a competent revenue authority — Tehsildar, Deputy Commissioner, Revenue Circle Officer or equivalent — stating the parents’ gross annual income from all sources.',
+  'To keep the scholarship, scholars must maintain regular class attendance and the marks criteria set by their institution.',
+  'Students studying through correspondence, part-time (evening or night) classes, or open universities are not eligible.',
+  'Clearing a failed subject in a later year, or passing on grace marks, makes a candidate ineligible — except in genuine, unavoidable cases supported by a recommendation from the competent authority.',
+  'Scholars who change school or college during the scholarship must inform the office immediately and submit their transfer or leaving certificate along with their marksheets.',
+  'A scholarship obtained through false statements or certificates will be cancelled and the amount recovered. Any breach of these terms may lead to suspension or cancellation.',
+  'Selected candidates are informed by the SSF office through email. In any dispute, the decision of the Executive Committee of the SSF Trust is final and binding.',
+]
+
 const FAQS: { q: string; a: string; open?: boolean }[] = [
   {
     q: 'What is the selection process for this scholarship programme?',
@@ -164,7 +195,8 @@ export default function ScholarshipPage() {
             <dl>
               {[
                 ['Application fee', '₹0', 'No charge at any stage'],
-                ['Who may apply', 'Class 11 & 12', 'All streams'],
+                ['Award', '₹5,000–₹20,000', 'Per year, paid by bank transfer'],
+                ['Who may apply', 'Class 11 & 12', 'Science, Commerce & Arts'],
                 ['Income limit', 'Under ₹8 lakh', 'Total annual family income'],
                 ['Minimum marks', '60%', 'In your last completed year'],
                 ['Region', 'Karnataka', 'Studying in or domiciled'],
@@ -186,6 +218,29 @@ export default function ScholarshipPage() {
               </Button>
             </div>
           </aside>
+        </div>
+      </section>
+
+      {/* ---------- What you receive ---------- */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 pb-4 sm:pb-6 -mt-2">
+        <Label>What you receive</Label>
+        <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
+          The award
+        </h2>
+        <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
+          A scholar receives between ₹5,000 and ₹20,000 a year, paid directly into their own bank
+          account. If you are selected, your bank account details, IFSC code and a cancelled cheque
+          in your name are required before any amount is released.
+        </p>
+
+        <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          {AWARD.map((a) => (
+            <div key={a.k} className="border-[1.5px] border-ink bg-cream px-5 py-5">
+              <div className="text-[0.7rem] uppercase tracking-[0.13em] text-muted">{a.k}</div>
+              <div className="mt-1 font-serif text-[1.5rem] text-marigold leading-tight">{a.v}</div>
+              <div className="mt-1.5 text-sm text-muted leading-relaxed">{a.note}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -336,6 +391,38 @@ export default function ScholarshipPage() {
             run, so every applicant is handled the same way.
           </p>
         </div>
+      </section>
+
+      {/* ---------- Terms and conditions ---------- */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 py-12 sm:py-16">
+        <Label>Terms and conditions</Label>
+        <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
+          The rules of the scholarship
+        </h2>
+        <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
+          These are the main conditions under which the scholarship is awarded and kept. Read them
+          before you apply — by submitting the form you accept them.
+        </p>
+
+        <ol className="mt-8 border-t border-line">
+          {TERMS.map((t, i) => (
+            <li
+              key={i}
+              className="grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5 items-start py-4 border-b border-line"
+            >
+              <span className="font-serif text-lg text-marigold leading-tight">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span className="text-[15px] text-muted leading-relaxed">{t}</span>
+            </li>
+          ))}
+        </ol>
+
+        <p className="mt-6 max-w-2xl text-sm text-muted leading-relaxed">
+          To process your application, you authorise Shikshasarathi Foundation to use the details you
+          submit, including your Aadhaar and PAN. The full scheme document, with every condition in
+          detail, is available from the Foundation on request.
+        </p>
       </section>
 
       {/* ---------- FAQs ---------- */}

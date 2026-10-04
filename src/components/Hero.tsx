@@ -33,16 +33,13 @@ export default function Hero() {
         </h1>
 
         <p className="mx-auto mt-6 sm:mt-7 max-w-xl text-base sm:text-lg text-muted leading-relaxed">
-          Merit scholarships and free counselling for students who have the talent but not the
-          means — arranged with partner organisations across Karnataka.
+          Merit scholarships and mentorship for students who have the talent but not the means,
+          across Karnataka.
         </p>
 
         <div className="mt-8 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           <Button href="/apply" variant="ink">
             Apply for the scholarship →
-          </Button>
-          <Button href="/request" variant="outline">
-            Request counselling
           </Button>
         </div>
       </div>

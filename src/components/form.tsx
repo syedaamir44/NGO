@@ -178,8 +178,17 @@ export function SelectField({
   full,
   options,
   placeholder = 'Select…',
-}: BaseProps & { options: string[]; placeholder?: string }) {
+  value,
+  onChange,
+}: BaseProps & {
+  options: string[]
+  placeholder?: string
+  /** Pass both to make the select controlled (used for conditional fields). */
+  value?: string
+  onChange?: (v: string) => void
+}) {
   const id = `f-${name.replace(/\W+/g, '-').toLowerCase()}`
+  const controlled = value !== undefined && onChange !== undefined
   return (
     <FieldShell full={full}>
       <FieldLabel htmlFor={id} required={required} hint={hint}>
@@ -189,6 +198,8 @@ export function SelectField({
         id={id}
         name={name}
         required={required}
+        value={controlled ? value : undefined}
+        onChange={controlled ? (e) => onChange!(e.currentTarget.value) : undefined}
         className={`${CONTROL} appearance-none pr-10 bg-no-repeat`}
         style={{
           backgroundImage:
@@ -203,6 +214,62 @@ export function SelectField({
         ))}
       </select>
     </FieldShell>
+  )
+}
+
+/**
+ * Stream picker plus a competitive-exam question that appears once a stream is
+ * chosen, with the exams that fit that stream. Self-contained state; the hidden
+ * inputs it renders (Stream, Competitive exams / Competitive exam (other)) are
+ * collected by the form's FormData like any other field.
+ */
+const EXAMS_BY_STREAM: Record<string, string[]> = {
+  Science: ['JEE (Main / Advanced)', 'KCET', 'NEET', 'CUET', 'Other / not decided yet'],
+  Commerce: [
+    'CA Foundation',
+    'CS Foundation',
+    'CMA Foundation',
+    'CUET',
+    'IPMAT (integrated BBA–MBA)',
+    'CLAT',
+    'Other / not decided yet',
+  ],
+  'Arts / Humanities': ['CUET', 'CLAT', 'NDA', 'Other / not decided yet'],
+}
+
+export function StreamExamFields() {
+  const [stream, setStream] = useState('')
+  const exams = EXAMS_BY_STREAM[stream]
+  return (
+    <>
+      <SelectField
+        name="Stream"
+        label="Stream"
+        required
+        options={['Science', 'Commerce', 'Arts / Humanities', 'Other']}
+        value={stream}
+        onChange={setStream}
+      />
+      {exams && (
+        <ChoiceGroup
+          key={stream}
+          full
+          required
+          type="checkbox"
+          name="Competitive exams"
+          label="Which competitive exam(s) are you preparing for?"
+          choices={exams.map((e) => ({ value: e, title: e }))}
+        />
+      )}
+      {stream === 'Other' && (
+        <TextField
+          full
+          name="Competitive exam (other)"
+          label="Which competitive exam are you preparing for?"
+          placeholder="Name the exam, or write ‘not decided yet’"
+        />
+      )}
+    </>
   )
 }
 
@@ -561,14 +628,15 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
     title: 'Student details',
     fields: [
       'Full name', 'Current class', 'Date of birth', 'Gender', 'Religion', 'Category',
-      'Aadhaar number', 'Mobile number', 'Email', 'Karnataka connection',
+      'Aadhaar number', 'PAN number', 'Mobile number', 'Email', 'Karnataka connection',
     ],
   },
   { title: 'Address', fields: ['Address', 'City or town', 'District', 'State', 'PIN code'] },
   {
     title: 'Academic details',
     fields: [
-      'Present college', 'Board of class 12', 'Stream', 'Class 11 college', 'Class 11 percentage',
+      'Present college', 'Board of class 12', 'Stream', 'Competitive exams',
+      'Competitive exam (other)', 'Class 11 college', 'Class 11 percentage',
       'Class 10 school', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
     ],
   },

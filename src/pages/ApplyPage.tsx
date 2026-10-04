@@ -4,6 +4,7 @@ import {
   Grid2,
   TextField,
   SelectField,
+  StreamExamFields,
   TextAreaField,
   ChoiceGroup,
   SetupNotice,
@@ -148,6 +149,14 @@ export default function ApplyPage() {
                     autoComplete="email"
                     hint="Shortlisting and results are emailed here"
                   />
+                  <TextField
+                    name="PAN number"
+                    label="PAN number"
+                    maxLength={10}
+                    placeholder="e.g. ABCDE1234F"
+                    style={{ textTransform: 'uppercase' }}
+                    hint="Optional — leave blank if you do not have a PAN yet"
+                  />
                   <SelectField
                     full
                     name="Karnataka connection"
@@ -220,12 +229,7 @@ export default function ApplyPage() {
                     required
                     placeholder="e.g. Karnataka PU Board, CBSE, ICSE"
                   />
-                  <SelectField
-                    name="Stream"
-                    label="Stream"
-                    required
-                    options={['Science', 'Commerce', 'Arts / Humanities', 'Other']}
-                  />
+                  <StreamExamFields />
                   <TextField
                     full
                     name="Class 11 college"
@@ -472,7 +476,6 @@ export default function ApplyPage() {
                     { value: 'Education counselling', title: 'Education counselling' },
                     { value: 'Career counselling', title: 'Career counselling' },
                     { value: 'Competitive exam guidance', title: 'Competitive exam guidance' },
-                    { value: 'Add-on skill courses', title: 'Add-on skill courses' },
                   ]}
                 />
                 <p className="-mt-2 mb-5 text-sm text-muted leading-relaxed">
@@ -493,7 +496,7 @@ export default function ApplyPage() {
                     {
                       value: 'Agreed',
                       title: 'I confirm the above details are true',
-                      note: 'I understand that applying is free of cost, that my details will be verified against my original documents, that selection is decided on merit and need through a published process, and that any scholarship awarded is to be used for my education. I understand that false information will disqualify my application.',
+                      note: 'I understand that applying is free of cost, that my details will be verified against my original documents, that selection is decided on merit and need through a published process, and that any scholarship awarded is to be used for my education. I give Shikshasarathi Foundation irrevocable authorisation to use the data I have submitted, including my Aadhaar and PAN, to process this application. I understand that false information will disqualify my application.',
                     },
                   ]}
                 />
