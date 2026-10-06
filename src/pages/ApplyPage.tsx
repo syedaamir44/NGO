@@ -4,7 +4,7 @@ import {
   Grid2,
   TextField,
   SelectField,
-  StreamExamFields,
+  AcademicSection,
   TextAreaField,
   ChoiceGroup,
   SetupNotice,
@@ -206,82 +206,9 @@ export default function ApplyPage() {
               {/* ---------- 3. Academic ---------- */}
               <Fieldset
                 legend="3. Academic details"
-                note="Work backwards from where you are now. Every name, number and percentage should match your marksheets exactly."
+                note="Tell us the class you are in now, and the rest of the section adjusts to it. Every name, number and percentage should match your marksheets exactly."
               >
-                <Grid2>
-                  <SelectField
-                    full
-                    name="Current class"
-                    label="Which class are you in now?"
-                    required
-                    options={['Class 11', 'Class 12']}
-                    hint="Both class 11 and class 12 students may apply this cycle"
-                  />
-                  <TextField
-                    full
-                    name="Present college"
-                    label="Name of your present college"
-                    required
-                  />
-                  <TextField
-                    name="Board of class 12"
-                    label="Board of your class 12 / present college"
-                    required
-                    placeholder="e.g. Karnataka PU Board, CBSE, ICSE"
-                  />
-                  <StreamExamFields />
-                  <TextField
-                    full
-                    name="Class 11 college"
-                    label="Name of the college where you studied class 11"
-                    required
-                    hint="If it is the same as your present college, write the same name again"
-                  />
-                  <TextField
-                    name="Class 11 percentage"
-                    label="Class 11 percentage"
-                    type="number"
-                    min={0}
-                    max={100}
-                    step="0.01"
-                    rule="percentage"
-                    placeholder="e.g. 72"
-                    hint="Number only, no % sign. Class 12 applicants: your class 11 result. Class 11 students still in their first year may leave this blank."
-                  />
-                  <TextField
-                    full
-                    name="Class 10 school"
-                    label="Name of your class 10 school"
-                    required
-                  />
-                  <TextField
-                    name="Class 10 year of passing"
-                    label="Year of passing class 10"
-                    required
-                    numeric
-                    maxLength={4}
-                    rule="year"
-                    placeholder="e.g. 2024"
-                  />
-                  <TextField
-                    name="Class 10 register number"
-                    label="Class 10 register number"
-                    required
-                    hint="As printed on your class 10 marksheet"
-                  />
-                  <TextField
-                    name="Class 10 percentage"
-                    label="Class 10 percentage"
-                    type="number"
-                    min={0}
-                    max={100}
-                    step="0.01"
-                    rule="percentage"
-                    required
-                    placeholder="e.g. 84"
-                    hint="Enter the number only, without the % sign"
-                  />
-                </Grid2>
+                <AcademicSection />
               </Fieldset>
 
               {/* ---------- 4. Fees ---------- */}

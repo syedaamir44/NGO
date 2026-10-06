@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import Logo from './Logo'
 import { SERVICES } from '../data/services'
 import type { PageName } from '../lib/useHashRoute'
 
@@ -54,14 +53,14 @@ export default function Navbar({ page }: { page: PageName }) {
       ].join(' ')}
     >
       <div className="px-6 sm:px-10 md:px-14 py-4 sm:py-5 flex items-center justify-between gap-4">
-        <a href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setOpen(false)}>
-          <Logo className="w-6 h-6 text-marigold" />
-          <span className="flex flex-col leading-none">
-            <span className="font-serif text-base tracking-tight text-ink">Shikshasarathi</span>
-            <span className="text-[9px] uppercase tracking-[0.2em] text-ink/50 mt-0.5">
-              Foundation
-            </span>
-          </span>
+        <a href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)} aria-label="Shikshasarathi Foundation — home">
+          <img
+            src="/logo.png"
+            alt="Shikshasarathi Foundation"
+            className="h-9 sm:h-10 w-auto"
+            width={461}
+            height={100}
+          />
         </a>
 
         {/* Centre links */}

@@ -59,7 +59,8 @@ export const FORM_ENDPOINTS: Record<FormKey, string> = {
   sponsor: `${SUBMIT_FN}?form=sponsor`,
 }
 
-export const CONTACT_EMAIL = 'contact@shikshasarathifoundation.org'
+export const CONTACT_EMAIL = 'connect@shikshasarathifoundation.org'
+// NOTE: scholarship form field "Board" maps to DB column board_class_12 in the submit-form function.
 export const CONTACT_PHONE = '+91 85498 67440'
 
 /** The current scholarship programme. Update each cycle. */

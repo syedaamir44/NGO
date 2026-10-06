@@ -1,7 +1,6 @@
 import { useRef, useState, type ReactNode, type FormEvent } from 'react'
 import { FORM_ENDPOINTS, CONTACT_EMAIL, CONTACT_PHONE, type FormKey } from '../config'
 import { Label } from './ui'
-import Logo from './Logo'
 
 /* ==================================================================
    Page header — the forest band at the top of every inner page
@@ -218,10 +217,7 @@ export function SelectField({
 }
 
 /**
- * Stream picker plus a competitive-exam question that appears once a stream is
- * chosen, with the exams that fit that stream. Self-contained state; the hidden
- * inputs it renders (Stream, Competitive exams / Competitive exam (other)) are
- * collected by the form's FormData like any other field.
+ * Competitive exams offered for each stream. Shown once a stream is picked.
  */
 const EXAMS_BY_STREAM: Record<string, string[]> = {
   Science: ['JEE (Main / Advanced)', 'KCET', 'NEET', 'CUET', 'Other / not decided yet'],
@@ -234,42 +230,138 @@ const EXAMS_BY_STREAM: Record<string, string[]> = {
     'CLAT',
     'Other / not decided yet',
   ],
-  'Arts / Humanities': ['CUET', 'CLAT', 'NDA', 'Other / not decided yet'],
+  'Arts / Humanities': ['CUET', 'CLAT', 'NDA', 'NID / NIFT (design)', 'Other / not decided yet'],
 }
 
-export function StreamExamFields() {
+/**
+ * The whole academic section, which adapts to the class the student is in.
+ *
+ * A class 11 student gives their present (class 11) details plus class 10, and
+ * the exams they plan to take. A class 12 student also gives their completed
+ * class 11 result and the exams they are preparing for now. Class-12-only
+ * fields never appear for a class 11 student. All state is local; every input
+ * it renders is collected by the form's FormData by its `name`.
+ */
+export function AcademicSection() {
+  const [currentClass, setCurrentClass] = useState('')
   const [stream, setStream] = useState('')
+  const is11 = currentClass === 'Class 11'
+  const is12 = currentClass === 'Class 12'
   const exams = EXAMS_BY_STREAM[stream]
+  const examLabel = is11
+    ? 'Which competitive exam(s) do you plan to take?'
+    : 'Which competitive exam(s) are you preparing for?'
+
   return (
-    <>
+    <Grid2>
       <SelectField
-        name="Stream"
-        label="Stream"
+        full
+        name="Current class"
+        label="Which class are you in now?"
         required
-        options={['Science', 'Commerce', 'Arts / Humanities', 'Other']}
-        value={stream}
-        onChange={setStream}
+        options={['Class 11', 'Class 12']}
+        value={currentClass}
+        onChange={setCurrentClass}
+        hint="Both class 11 and class 12 students may apply this cycle"
       />
-      {exams && (
-        <ChoiceGroup
-          key={stream}
-          full
-          required
-          type="checkbox"
-          name="Competitive exams"
-          label="Which competitive exam(s) are you preparing for?"
-          choices={exams.map((e) => ({ value: e, title: e }))}
-        />
+
+      {currentClass && (
+        <>
+          <TextField
+            full
+            name="Present college"
+            label={`Name of your present college${is11 ? ' (class 11)' : ' (class 12)'}`}
+            required
+          />
+          <TextField
+            name="Board"
+            label={is11 ? 'Board of your present college' : 'Board of your class 12 / present college'}
+            required
+            placeholder="e.g. Karnataka PU Board, CBSE, ICSE"
+          />
+          <SelectField
+            name="Stream"
+            label="Stream"
+            required
+            options={['Science', 'Commerce', 'Arts / Humanities', 'Other']}
+            value={stream}
+            onChange={setStream}
+          />
+          {exams && (
+            <ChoiceGroup
+              key={stream}
+              full
+              required
+              type="checkbox"
+              name="Competitive exams"
+              label={examLabel}
+              choices={exams.map((e) => ({ value: e, title: e }))}
+            />
+          )}
+          {stream === 'Other' && (
+            <TextField
+              full
+              name="Competitive exam (other)"
+              label={examLabel}
+              placeholder="Name the exam, or write ‘not decided yet’"
+            />
+          )}
+
+          {is12 && (
+            <>
+              <TextField
+                full
+                name="Class 11 college"
+                label="Name of the college where you studied class 11"
+                required
+                hint="If it is the same as your present college, write the same name again"
+              />
+              <TextField
+                name="Class 11 percentage"
+                label="Class 11 percentage"
+                type="number"
+                min={0}
+                max={100}
+                step="0.01"
+                rule="percentage"
+                required
+                placeholder="e.g. 72"
+                hint="Number only, no % sign"
+              />
+            </>
+          )}
+
+          <TextField full name="Class 10 school" label="Name of your class 10 school" required />
+          <TextField
+            name="Class 10 year of passing"
+            label="Year of passing class 10"
+            required
+            numeric
+            maxLength={4}
+            rule="year"
+            placeholder="e.g. 2024"
+          />
+          <TextField
+            name="Class 10 register number"
+            label="Class 10 register number"
+            required
+            hint="As printed on your class 10 marksheet"
+          />
+          <TextField
+            name="Class 10 percentage"
+            label="Class 10 percentage"
+            type="number"
+            min={0}
+            max={100}
+            step="0.01"
+            rule="percentage"
+            required
+            placeholder="e.g. 84"
+            hint="Enter the number only, without the % sign"
+          />
+        </>
       )}
-      {stream === 'Other' && (
-        <TextField
-          full
-          name="Competitive exam (other)"
-          label="Which competitive exam are you preparing for?"
-          placeholder="Name the exam, or write ‘not decided yet’"
-        />
-      )}
-    </>
+    </Grid2>
   )
 }
 
@@ -627,7 +719,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   {
     title: 'Student details',
     fields: [
-      'Full name', 'Current class', 'Date of birth', 'Gender', 'Religion', 'Category',
+      'Full name', 'Date of birth', 'Gender', 'Religion', 'Category',
       'Aadhaar number', 'PAN number', 'Mobile number', 'Email', 'Karnataka connection',
     ],
   },
@@ -635,7 +727,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   {
     title: 'Academic details',
     fields: [
-      'Present college', 'Board of class 12', 'Stream', 'Competitive exams',
+      'Current class', 'Present college', 'Board', 'Stream', 'Competitive exams',
       'Competitive exam (other)', 'Class 11 college', 'Class 11 percentage',
       'Class 10 school', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
     ],
@@ -700,17 +792,10 @@ export function ApplicationReceipt({
   return (
     <div id="app-receipt" className="mt-6 border-[1.5px] border-ink bg-white">
       {/* Header */}
-      <div className="flex items-start justify-between gap-4 px-5 sm:px-7 py-5 border-b-2 border-ink">
-        <div className="flex items-center gap-3">
-          <Logo className="w-9 h-9 text-marigold shrink-0" />
-          <div>
-            <div className="font-serif text-[1.15rem] leading-tight text-ink-deep">
-              Shikshasarathi Foundation
-            </div>
-            <div className="text-[0.78rem] text-muted leading-snug">
-              Bangalore, Karnataka · {CONTACT_EMAIL} · {CONTACT_PHONE}
-            </div>
-          </div>
+      <div className="px-5 sm:px-7 py-5 border-b-2 border-ink">
+        <img src="/logo.png" alt="Shikshasarathi Foundation" className="h-10 w-auto" />
+        <div className="mt-2 text-[0.78rem] text-muted leading-snug">
+          Bangalore, Karnataka · {CONTACT_EMAIL} · {CONTACT_PHONE}
         </div>
       </div>
 
