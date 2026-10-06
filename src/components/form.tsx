@@ -254,8 +254,18 @@ export function AcademicSection() {
 
   return (
     <Grid2>
+      {/* Stream and class are always visible; the rest of the section and the
+          exam list adapt to them. */}
       <SelectField
-        full
+        name="Stream"
+        label="Which stream are you in?"
+        required
+        options={['Science', 'Commerce', 'Arts / Humanities', 'Other']}
+        value={stream}
+        onChange={setStream}
+        hint="Sets the competitive exams shown below"
+      />
+      <SelectField
         name="Current class"
         label="Which class are you in now?"
         required
@@ -264,6 +274,26 @@ export function AcademicSection() {
         onChange={setCurrentClass}
         hint="Both class 11 and class 12 students may apply this cycle"
       />
+
+      {exams && (
+        <ChoiceGroup
+          key={stream}
+          full
+          required
+          type="checkbox"
+          name="Competitive exams"
+          label={examLabel}
+          choices={exams.map((e) => ({ value: e, title: e }))}
+        />
+      )}
+      {stream === 'Other' && (
+        <TextField
+          full
+          name="Competitive exam (other)"
+          label={examLabel}
+          placeholder="Name the exam, or write ‘not decided yet’"
+        />
+      )}
 
       {currentClass && (
         <>
@@ -279,33 +309,6 @@ export function AcademicSection() {
             required
             placeholder="e.g. Karnataka PU Board, CBSE, ICSE"
           />
-          <SelectField
-            name="Stream"
-            label="Stream"
-            required
-            options={['Science', 'Commerce', 'Arts / Humanities', 'Other']}
-            value={stream}
-            onChange={setStream}
-          />
-          {exams && (
-            <ChoiceGroup
-              key={stream}
-              full
-              required
-              type="checkbox"
-              name="Competitive exams"
-              label={examLabel}
-              choices={exams.map((e) => ({ value: e, title: e }))}
-            />
-          )}
-          {stream === 'Other' && (
-            <TextField
-              full
-              name="Competitive exam (other)"
-              label={examLabel}
-              placeholder="Name the exam, or write ‘not decided yet’"
-            />
-          )}
 
           {is12 && (
             <>
