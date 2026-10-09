@@ -25,7 +25,7 @@ const ASK = [
 
 const RECEIVE = [
   'A scholarship opportunity, free to apply for, open to every eligible student you reach',
-  'Access to education counselling, career counselling, exam guidance and skill courses for your students and their parents',
+  'Access to education mentorship, career mentorship, exam guidance and skill courses for your students and their parents',
   'Help with the cost of those services for students whose families cannot meet it',
   'An on-campus session at no cost to your organisation',
   'Public recognition whenever one of your students is selected as a scholar, and an invitation to the annual ceremony',
@@ -176,7 +176,7 @@ export default function PartnerPage() {
                       'Principal',
                       'Vice Principal',
                       'Lecturer / Teacher',
-                      'School counsellor',
+                      'School mentor',
                       'Administrative staff',
                       'Management / Trustee',
                       'NGO programme staff',

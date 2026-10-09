@@ -11,7 +11,6 @@ export const PAGES = [
   'apply',
   'request',
   'partner',
-  'sponsor',
 ] as const
 
 export type PageName = (typeof PAGES)[number]
@@ -44,29 +43,29 @@ export function pathToPage(pathname: string): PageName {
 /** Per-page <head> content. Titles ~60 chars, descriptions ~150. */
 export const META: Record<PageName, { title: string; description: string }> = {
   home: {
-    title: 'Shikshasarathi Foundation — Merit Scholarships & Student Counselling',
+    title: 'Shikshasarathi Foundation — Merit Scholarships & Student Mentorship',
     description:
-      'A non-profit offering merit scholarships and free education, career and competitive-exam counselling for students from low-income families across Karnataka.',
+      'A non-profit offering merit scholarships and free education, career and competitive-exam mentorship for students from low-income families across Karnataka.',
   },
   about: {
     title: 'About Us — Shikshasarathi Foundation',
     description:
-      'Who we are, why we started, and how we fund scholarships and arrange counselling for students who have the talent but not the means.',
+      'Who we are, why we started, and how we fund scholarships and arrange mentorship for students who have the talent but not the means.',
   },
   scholarship: {
-    title: 'All India Merit Scholarship 2026 — Shikshasarathi Foundation',
+    title: 'Shiksha Sarathi Merit Scholarship 2026 — Shikshasarathi Foundation',
     description:
-      'Eligibility, selection, documents and dates for the All India Merit Scholarship 2026, with direct financial support paid when college fees fall due.',
+      'Eligibility, selection, documents and dates for the Shiksha Sarathi Merit Scholarship 2026, with direct financial support paid when college fees fall due.',
   },
   'education-counselling': {
-    title: 'Education Counselling — Shikshasarathi Foundation',
+    title: 'Education Mentorship — Shikshasarathi Foundation',
     description:
       'Free guidance on which stream, which course and which college to choose, and what each choice actually leads to.',
   },
   'career-counselling': {
-    title: 'Career Counselling — Shikshasarathi Foundation',
+    title: 'Career Mentorship — Shikshasarathi Foundation',
     description:
-      'Free counselling on what a job really involves, what it pays and what it demands — before a student spends years preparing for it.',
+      'Free mentorship on what a job really involves, what it pays and what it demands — before a student spends years preparing for it.',
   },
   'exam-guidance': {
     title: 'Competitive Exam Guidance — Shikshasarathi Foundation',
@@ -76,27 +75,22 @@ export const META: Record<PageName, { title: string; description: string }> = {
   'skill-courses': {
     title: 'Skill Enhancement Courses — Shikshasarathi Foundation',
     description:
-      'Counselling on short, practical skill courses that lead to real work, alongside a degree or instead of waiting for one.',
+      'Mentorship on short, practical skill courses that lead to real work, alongside a degree or instead of waiting for one.',
   },
   apply: {
     title: 'Apply for the Scholarship — Shikshasarathi Foundation',
     description:
-      'Apply for the All India Merit Scholarship 2026. Applying is free — the form takes details that match your documents.',
+      'Apply for the Shiksha Sarathi Merit Scholarship 2026. Applying is free — the form takes details that match your documents.',
   },
   request: {
-    title: 'Request Counselling — Shikshasarathi Foundation',
+    title: 'Request Mentorship — Shikshasarathi Foundation',
     description:
-      'Request a free education, career or competitive-exam counselling session with the Foundation and its partner organisations.',
+      'Request a free education, career or competitive-exam mentorship session with the Foundation and its partner organisations.',
   },
   partner: {
     title: 'Partner With Us — Shikshasarathi Foundation',
     description:
       'For schools, colleges and NGOs: nominate students, host a session, and help us reach students before the decision is made.',
-  },
-  sponsor: {
-    title: 'Donate — Shikshasarathi Foundation',
-    description:
-      'Support a scholar or a counselling session. A contribution funds a student who would otherwise drop out.',
   },
 }
 

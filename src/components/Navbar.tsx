@@ -104,12 +104,6 @@ export default function Navbar({ page }: { page: PageName }) {
           >
             For institutions
           </a>
-          <a
-            href="/sponsor"
-            className="text-sm text-ink/70 hover:text-ink transition-colors duration-200"
-          >
-            Donate
-          </a>
         </div>
 
         <div className="flex items-center gap-2">
@@ -162,7 +156,6 @@ export default function Navbar({ page }: { page: PageName }) {
           {[
             { label: 'About us', href: '/about' },
             { label: 'For institutions', href: '/partner' },
-            { label: 'Donate', href: '/sponsor' },
           ].map((l) => (
             <a
               key={l.href}

@@ -9,12 +9,12 @@ const WHAT_WE_DO = [
     href: '/scholarship',
   },
   {
-    title: 'Education counselling',
+    title: 'Education mentorship',
     body: 'Which stream after class 10, which course after class 12, which colleges are genuinely within reach, what each option costs, and what has to be done by when.',
     href: '/education-counselling',
   },
   {
-    title: 'Career counselling',
+    title: 'Career mentorship',
     body: 'What a job actually involves day to day, what it pays at the start, what qualifications it truly requires, and what to do when the first plan does not work.',
     href: '/career-counselling',
   },
@@ -41,7 +41,7 @@ const PRINCIPLES = [
   },
   {
     title: 'Independent guidance',
-    body: 'The Foundation accepts no commission and no referral fee from any counsellor, college, coaching centre or training institute. That independence is deliberate. It is what allows us to recommend a provider honestly — and, just as often, to tell a student that they do not need the service at all.',
+    body: 'The Foundation accepts no commission and no referral fee from any mentor, college, coaching centre or training institute. That independence is deliberate. It is what allows us to recommend a provider honestly — and, just as often, to tell a student that they do not need the service at all.',
   },
   {
     title: 'Cost should not decide who gets help',
@@ -73,12 +73,6 @@ const GET_INVOLVED = [
     body: 'Partner with us. It costs your organisation nothing, and you are the people who see these students first.',
     cta: 'Become a partner →',
     href: '/partner',
-  },
-  {
-    title: 'Donors and CSR partners',
-    body: 'A contribution funds a scholarship for a student who cannot pay the fees, and sponsors guidance for students who cannot meet a partner’s charges. We publish our accounts every year.',
-    cta: 'Support a student →',
-    href: '/sponsor',
   },
 ]
 
@@ -214,8 +208,8 @@ export default function AboutPage() {
         </div>
 
         <p className="mt-6 max-w-3xl text-[15px] text-muted leading-relaxed">
-          The four guidance services are arranged with expert partner counsellors, mentors and
-          institutes who specialise in each area. They set their own fees, we tell a student the cost
+          The four guidance services are arranged with expert partner mentors and institutes who
+          specialise in each area. They set their own fees, we tell a student the cost
           before anything is booked, and where a family cannot meet it we arrange a concession, a
           discount or full sponsorship.
         </p>

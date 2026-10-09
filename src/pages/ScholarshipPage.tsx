@@ -1,6 +1,7 @@
 import { PageHeader } from '../components/form'
 import { Label, Button } from '../components/ui'
-import { PROGRAMME, CONTACT_EMAIL, IMPLEMENTATION_PARTNER } from '../config'
+import ShareRow from '../components/ShareRow'
+import { PROGRAMME, CONTACT_EMAIL, CONTACT_PHONE, IMPLEMENTATION_PARTNER } from '../config'
 
 const ELIGIBILITY = [
   {
@@ -23,36 +24,28 @@ const ELIGIBILITY = [
 
 const STEPS = [
   {
-    title: 'Click Apply Now',
-    body: 'Start your registration and application from the Apply Now button on this page.',
+    title: 'Open the application form',
+    body: 'Click Apply on this page to open the form. No account and no login are needed — you can fill it in one sitting.',
   },
   {
-    title: 'Log in to start the application',
-    body: 'Log in with your registered account to reach the form — or create an account first if you are new.',
+    title: 'Fill in your details',
+    body: 'Complete every section — your details, academics, family and bank information. Details that match your documents exactly are what save you time later.',
   },
   {
-    title: 'Access the application form',
-    body: `Once logged in, you land on the ${PROGRAMME.name} application form page.`,
+    title: 'Tell us your stream and exams',
+    body: 'Choose your stream and class, and the competitive exams you plan to take. The form adjusts to class 11 or class 12 automatically.',
   },
   {
-    title: 'Start the application',
-    body: 'Choose your scholarship category and click Start Application to begin.',
+    title: 'Review and accept the declaration',
+    body: 'Check every detail, then accept the declaration confirming your information is true. Once submitted, the application cannot be changed.',
   },
   {
-    title: 'Fill in the form',
-    body: 'Complete every section accurately. Details that do not match your documents are the most common reason an application is held up.',
+    title: 'Submit and save your acknowledgment',
+    body: 'Submit the form. You get an Application ID on screen and a printable acknowledgment you can download or print and keep.',
   },
   {
-    title: 'Upload your documents',
-    body: 'Upload clear, readable copies of the supporting documents required for your category.',
-  },
-  {
-    title: 'Accept terms and review',
-    body: 'Accept the terms and conditions, then check every detail in the preview.',
-  },
-  {
-    title: 'Submit',
-    body: 'Verify everything is correct and submit. Once submitted, the application cannot be changed.',
+    title: 'Keep your documents ready',
+    body: 'If you are shortlisted, we ask for your marksheets, income certificate and bank proof for verification. Keep clear copies ready so this moves quickly.',
   },
 ]
 
@@ -126,7 +119,7 @@ const FAQS: { q: string; a: string; open?: boolean }[] = [
   },
   {
     q: `How do I apply for the ${PROGRAMME.name}?`,
-    a: 'Create an account on the portal, complete your profile, choose your scholarship category, fill in the online application form, upload the required documents, and submit — all online.',
+    a: 'Open the application form from this page — no account or login is needed — fill in every section, accept the declaration and submit. You get an Application ID and a printable acknowledgment straight away. If you are shortlisted, we ask for your documents for verification at that stage.',
   },
   {
     q: 'What can I submit instead of a fee receipt if I study at a government school?',
@@ -277,7 +270,8 @@ export default function ScholarshipPage() {
           The application process
         </h2>
         <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
-          Eight steps, all online. Follow them in order to apply for the {PROGRAMME.name}.
+          A few simple steps, all online. No account or login needed — follow them in order to apply
+          for the {PROGRAMME.name}.
         </p>
 
         <div className="mt-8 border-t border-line">
@@ -311,12 +305,12 @@ export default function ScholarshipPage() {
         <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14">
           <Label>Documents required</Label>
           <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
-            Keep these ready before you start
+            Keep these ready for verification
           </h2>
           <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
-            The exact documents depend on your scholarship category. Gathering them first makes the
-            application quick — several of these take days to obtain from a local office, so it is
-            worth starting early.
+            You do not upload anything with the form. If you are shortlisted, we ask for these for
+            verification — and several take days to obtain from a local office, so it is worth
+            gathering them early.
           </p>
 
           <div className="mt-8 border-t border-line grid md:grid-cols-2 md:gap-x-11">
@@ -449,9 +443,18 @@ export default function ScholarshipPage() {
             <a href={`mailto:${CONTACT_EMAIL}`} className="text-forest2 underline break-all">
               {CONTACT_EMAIL}
             </a>{' '}
+            or call{' '}
+            <a href={`tel:${CONTACT_PHONE.replace(/\s/g, '')}`} className="text-forest2 underline">
+              {CONTACT_PHONE}
+            </a>{' '}
             and a person will answer you.
           </p>
         </div>
+      </section>
+
+      {/* ---------- Share ---------- */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 py-12 sm:py-14">
+        <ShareRow />
       </section>
 
       {/* ---------- CTA ---------- */}

@@ -63,7 +63,7 @@ export default function RequestPage() {
             </p>
 
             <form ref={formRef} onSubmit={onSubmit} onInput={onInput} onChange={onInput} noValidate>
-              <input type="hidden" name="_form" value="Counselling Request" />
+              <input type="hidden" name="_form" value="Mentorship Request" />
 
               <Fieldset legend="1. What you need help with">
                 <ChoiceGroup
@@ -73,13 +73,13 @@ export default function RequestPage() {
                   required
                   choices={[
                     {
-                      value: 'Education counselling',
-                      title: 'Education counselling',
+                      value: 'Education mentorship',
+                      title: 'Education mentorship',
                       note: 'Which stream, which course and which college — and what each one leads to',
                     },
                     {
-                      value: 'Career counselling',
-                      title: 'Career counselling',
+                      value: 'Career mentorship',
+                      title: 'Career mentorship',
                       note: 'What a career actually involves, and whether it fits you',
                     },
                     {

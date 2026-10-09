@@ -19,15 +19,6 @@ const BLOCKS = [
     cta: 'Refer students to us →',
     href: '/partner',
   },
-  {
-    title: 'For donors and CSR partners',
-    paras: [
-      'A contribution does two things at once. It puts an additional student on the scholarship list, and it funds the concessions and sponsorships that let students afford the guidance and skill courses we arrange for them.',
-      'Sponsoring a counselling session or a skill course costs a fraction of a scholarship and often changes a student’s direction just as decisively. We publish our accounts every year.',
-    ],
-    cta: 'Support a student →',
-    href: '/sponsor',
-  },
 ]
 
 export default function WorkWithUs() {
@@ -35,10 +26,10 @@ export default function WorkWithUs() {
     <Section className="bg-ink text-[#E7DECC]">
       <Label tone="light">Work with us</Label>
       <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight text-white">
-        Three ways to reach a student before the decision is made
+        Two ways to reach a student before the decision is made
       </h2>
 
-      <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-9">
+      <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-9">
         {BLOCKS.map((b) => (
           <div key={b.title} className="flex flex-col">
             <h3 className="inline-block self-start font-serif text-lg text-white border-b-2 border-marigold-l pb-2.5">

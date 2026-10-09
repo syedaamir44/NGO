@@ -28,8 +28,8 @@ export default function ServicesOverview() {
       <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
         The first removes a financial barrier. The other four remove an information barrier — and in
         our experience the second kind stops just as many students as the first. We fund the
-        scholarship ourselves and arrange the rest with partner organisations, including help with
-        their cost where a student needs it.
+        scholarship ourselves and arrange the mentorship that goes with it, including help with the
+        cost where a student needs it.
       </p>
 
       <div className="mt-10 border-t border-line">

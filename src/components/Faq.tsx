@@ -4,7 +4,7 @@ import { CONTACT_EMAIL } from '../config'
 const FAQS: { q: string; a: string; open?: boolean }[] = [
   {
     q: 'What does Shikshasarathi Foundation actually provide?',
-    a: 'Two different things. The All India Merit Scholarship, which we fund and award ourselves, and four guidance services — education counselling, career counselling, competitive exam guidance and add-on skill courses — which we arrange for students with partner organisations.',
+    a: 'Two different things. The Shiksha Sarathi Merit Scholarship, which we fund and award ourselves, and four guidance services — education mentorship, career mentorship, competitive exam guidance and add-on skill courses — which we arrange for students who need them.',
     open: true,
   },
   {
@@ -12,20 +12,16 @@ const FAQS: { q: string; a: string; open?: boolean }[] = [
     a: 'No. There is no application fee, no processing fee and no charge at any stage of the scholarship. If anyone asks you for money to apply, to process an application or to release an award in our name, it is a fraud. Please do not pay, and tell us who approached you.',
   },
   {
-    q: 'What about the counselling and skill courses — are those free?',
-    a: 'Those are delivered by partner counsellors, mentors and institutes, and each partner sets its own fees. We tell you the cost before anything is booked. Where a student genuinely needs a service and the family cannot meet the cost, we arrange a concession, a discount or full sponsorship, decided case by case on family income and on how much difference the service will make.',
+    q: 'What about the mentorship and skill courses — are those free?',
+    a: 'Those are delivered by partner mentors and institutes, and each partner sets its own fees. We tell you the cost before anything is booked. Where a student genuinely needs a service and the family cannot meet the cost, we arrange a concession, a discount or full sponsorship, decided case by case on family income and on how much difference the service will make.',
   },
   {
     q: 'Does the Foundation earn anything from the partners it recommends?',
-    a: 'No. We take no commission and no referral fee from any counsellor, institute, college or coaching centre. That independence is deliberate: it is what allows us to recommend one honestly, and to tell a student that a course is not worth paying for.',
+    a: 'No. We take no commission and no referral fee from any mentor, institute, college or coaching centre. That independence is deliberate: it is what allows us to recommend one honestly, and to tell a student that a course is not worth paying for.',
   },
   {
-    q: 'Who is eligible for the All India Merit Scholarship 2026?',
+    q: 'Who is eligible for the Shiksha Sarathi Merit Scholarship 2026?',
     a: 'Students currently studying in class 12, with a total annual family income below ₹8 lakh, who scored at least 60% in class 11, and who study in or are domiciled in Karnataka. Full details are on the scholarship page.',
-  },
-  {
-    q: 'Why is the scholarship limited to Karnataka when it is called All India?',
-    a: 'Because we would rather run one state properly than several badly. The programme is built to run nationally and the name reflects where it is going, but for the 2026 cycle we can verify documents, interview candidates and follow up with families only within Karnataka. We would rather say that plainly than accept applications we could not process.',
   },
   {
     q: 'How are scholars selected?',

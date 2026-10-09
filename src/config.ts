@@ -14,7 +14,7 @@
  * scrim that keeps the headline readable.
  *
  * A note worth more than the code: use your OWN photographs — your
- * students, your counselling sessions, your ceremony. A real photograph of
+ * students, your mentorship sessions, your ceremony. A real photograph of
  * a real scholar is worth a dozen stock graduation shots, and for a
  * foundation asking people for money and trust, a stock photo of somebody
  * else’s students is a small dishonesty that visitors do notice. Get written
@@ -61,11 +61,14 @@ export const FORM_ENDPOINTS: Record<FormKey, string> = {
 
 export const CONTACT_EMAIL = 'connect@shikshasarathifoundation.org'
 // NOTE: scholarship form field "Board" maps to DB column board_class_12 in the submit-form function.
-export const CONTACT_PHONE = '+91 85498 67440'
+export const CONTACT_PHONE = '+91 84949 77440'
+
+/** Social profiles. */
+export const INSTAGRAM_URL = 'https://www.instagram.com/shikshasarathifoundation/'
 
 /** The current scholarship programme. Update each cycle. */
 export const PROGRAMME = {
-  name: 'All India Merit Scholarship 2026',
+  name: 'Shiksha Sarathi Merit Scholarship 2026',
   cycle: '2026–27',
   opens: '1 October 2026',
   closes: '10 November 2026',

@@ -12,7 +12,6 @@ import ServicePage from './pages/ServicePage'
 import ApplyPage from './pages/ApplyPage'
 import RequestPage from './pages/RequestPage'
 import PartnerPage from './pages/PartnerPage'
-import SponsorPage from './pages/SponsorPage'
 import { useHashRoute, SERVICE_PAGES, type ServiceKey } from './lib/useHashRoute'
 
 function Home() {
@@ -43,7 +42,6 @@ export default function App() {
         {page === 'apply' && <ApplyPage />}
         {page === 'request' && <RequestPage />}
         {page === 'partner' && <PartnerPage />}
-        {page === 'sponsor' && <SponsorPage />}
       </main>
       <Footer />
       <AnnouncementModal />

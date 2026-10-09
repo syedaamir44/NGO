@@ -24,14 +24,14 @@ export const SERVICES: Service[] = [
   /* ============================================================ */
   {
     key: 'education-counselling',
-    name: 'Education Counselling',
+    name: 'Education Mentorship',
     index: '02',
     teaser:
       'Which stream, which course and which college — and what each one actually leads to.',
-    label: 'Arranged with partner counsellors',
-    title: 'Education counselling',
+    label: 'Arranged with partner mentors',
+    title: 'Education mentorship',
     intro:
-      'Choosing what to study is the biggest decision most families make with the least information. A counsellor goes through it properly with the student and the parents: the options, what each one costs, what each one leads to, and what has to be done by when.',
+      'Choosing what to study is the biggest decision most families make with the least information. A mentor goes through it properly with the student and the parents: the options, what each one costs, what each one leads to, and what has to be done by when.',
     problem: [
       'Most students choose a stream because a cousin chose it, a neighbour recommended it, or it was the only subject the nearest college offered. Very few choose it because somebody explained where it leads.',
       'A great deal of help already exists — government seats, fee concessions, state and central scholarships, hostels for students from outside the city. Much of it goes unclaimed every year, not because families were refused, but because nobody told them it was there, or told them three weeks after the form had closed.',
@@ -80,7 +80,7 @@ export const SERVICES: Service[] = [
         body: 'Somebody from the Foundation calls within three working days to understand the situation — marks, interests, family circumstances and constraints — before suggesting anything.',
       },
       {
-        title: 'We match you with a counsellor, and tell you the cost',
+        title: 'We match you with a mentor, and tell you the cost',
         body: 'We identify the partner best suited to your case and tell you plainly what they charge. If the cost is beyond what your family can manage, we discuss a concession or sponsorship at this stage, before anything is booked.',
       },
       {
@@ -98,8 +98,8 @@ export const SERVICES: Service[] = [
     ],
     faqs: [
       {
-        q: 'Does Shikshasarathi Foundation conduct the counselling itself?',
-        a: 'No. We arrange it with partner counsellors and organisations who specialise in this work, and we match you with the one that suits your situation. What we do ourselves is understand your case, find the right person for it, arrange support with the cost where it is needed, and follow up afterwards.',
+        q: 'Does Shikshasarathi Foundation conduct the mentorship itself?',
+        a: 'No. We arrange it with partner mentors and organisations who specialise in this work, and we match you with the one that suits your situation. What we do ourselves is understand your case, find the right person for it, arrange support with the cost where it is needed, and follow up afterwards.',
       },
       {
         q: 'What does a session cost?',
@@ -110,12 +110,12 @@ export const SERVICES: Service[] = [
         a: 'Tell us. Where a student genuinely needs a service and cannot meet its cost, we arrange a concession, a discount or full sponsorship. Each case is decided individually, on family income and on how much difference the service is likely to make. Please ask rather than assuming the answer is no.',
       },
       {
-        q: 'Do I have to be a scholarship applicant to ask for counselling?',
-        a: 'No. The two are entirely separate. You may use these services without ever applying for a scholarship, and asking for counselling gives you no advantage in scholarship selection.',
+        q: 'Do I have to be a scholarship applicant to ask for mentorship?',
+        a: 'No. The two are entirely separate. You may use these services without ever applying for a scholarship, and asking for mentorship gives you no advantage in scholarship selection.',
       },
       {
         q: 'Which languages are sessions available in?',
-        a: 'English, Kannada, Hindi and Urdu. Tell us your preference when you send the request and we will match you with a counsellor accordingly.',
+        a: 'English, Kannada, Hindi and Urdu. Tell us your preference when you send the request and we will match you with a mentor accordingly.',
       },
     ],
   },
@@ -123,12 +123,12 @@ export const SERVICES: Service[] = [
   /* ============================================================ */
   {
     key: 'career-counselling',
-    name: 'Career Counselling',
+    name: 'Career Mentorship',
     index: '03',
     teaser:
       'What a job actually involves, what it pays and what it demands — before you spend three years preparing for it.',
-    label: 'Arranged with partner counsellors',
-    title: 'Career counselling',
+    label: 'Arranged with partner mentors',
+    title: 'Career mentorship',
     intro:
       'Most career advice a student receives amounts to a list of job titles. These sessions aim at something more useful: what the work is like day to day, what it pays at the start, what qualifications it genuinely requires, and what to do if the first plan does not work.',
     problem: [
@@ -166,7 +166,7 @@ export const SERVICES: Service[] = [
       },
       {
         title: 'The conversation with parents',
-        body: 'Where a student and their family want different things, a counsellor helps both sides hear each other — often by supplying the facts about pay and prospects that the argument was missing.',
+        body: 'Where a student and their family want different things, a mentor helps both sides hear each other — often by supplying the facts about pay and prospects that the argument was missing.',
       },
     ],
     steps: [
@@ -179,7 +179,7 @@ export const SERVICES: Service[] = [
         body: 'Somebody from the Foundation calls to learn where you are, what you are weighing up and what your constraints are.',
       },
       {
-        title: 'We match you with a counsellor, and tell you the cost',
+        title: 'We match you with a mentor, and tell you the cost',
         body: 'We identify the partner best suited to your case and tell you exactly what they charge. Where the cost is beyond a family’s means, we discuss a concession or sponsorship before anything is booked.',
       },
       {
@@ -188,7 +188,7 @@ export const SERVICES: Service[] = [
       },
       {
         title: 'The one-to-one session',
-        body: 'About an hour with the counsellor, going through the profile and mapping realistic options against it.',
+        body: 'About an hour with the mentor, going through the profile and mapping realistic options against it.',
       },
       {
         title: 'Your career map, and a check-in later',
@@ -197,12 +197,12 @@ export const SERVICES: Service[] = [
     ],
     faqs: [
       {
-        q: 'How is this different from education counselling?',
-        a: 'Education counselling is about what to study next and how to get in. Career counselling looks further ahead, at the work itself and whether it suits you. Many students use both, usually education counselling first.',
+        q: 'How is this different from education mentorship?',
+        a: 'Education mentorship is about what to study next and how to get in. Career mentorship looks further ahead, at the work itself and whether it suits you. Many students use both, usually education mentorship first.',
       },
       {
         q: 'What does a session cost?',
-        a: 'The fee is set by the partner counsellor rather than by the Foundation, and it varies with the format and length of the session. We tell you the amount before anything is booked. Where a family cannot meet it, ask us about a concession or sponsorship.',
+        a: 'The fee is set by the partner mentor rather than by the Foundation, and it varies with the format and length of the session. We tell you the amount before anything is booked. Where a family cannot meet it, ask us about a concession or sponsorship.',
       },
       {
         q: 'Do you guarantee a job or a placement?',
@@ -210,7 +210,7 @@ export const SERVICES: Service[] = [
       },
       {
         q: 'My family wants me to take a career I am not interested in. Can this help?',
-        a: 'It can help both of you look at the same facts together — what the work involves, what it pays and what the alternatives offer. A counsellor does not take sides against your family and does not make the decision for you. Very often the disagreement turns out to be about security rather than about the subject, and that is a solvable conversation.',
+        a: 'It can help both of you look at the same facts together — what the work involves, what it pays and what the alternatives offer. A mentor does not take sides against your family and does not make the decision for you. Very often the disagreement turns out to be about security rather than about the subject, and that is a solvable conversation.',
       },
     ],
   },
@@ -223,7 +223,7 @@ export const SERVICES: Service[] = [
     teaser:
       'CET, NEET, JEE, banking, SSC, railways and state services — which examination suits you, and how to prepare without wasting money.',
     label: 'Arranged with partner mentors',
-    title: 'Competitive exam counselling and guidance',
+    title: 'Competitive exam mentorship and guidance',
     intro:
       'Competitive examinations are among the fairest doors India offers, because an entrance test does not ask what your father does. But they are surrounded by an industry that profits from confusion. This service gives a student a clear reading of which examination suits them and how to prepare sensibly, including how much of the preparation can be done at no cost.',
     problem: [

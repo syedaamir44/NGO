@@ -640,6 +640,122 @@ function validateField(field: Element): boolean {
   return true
 }
 
+/**
+ * Validate every field inside one wizard step. Scrolls to and focuses the first
+ * invalid field. Returns true when the step is complete.
+ */
+export function validateStep(container: Element | null): boolean {
+  if (!container) return true
+  let firstBad: Element | null = null
+  container.querySelectorAll('.eif-field').forEach((field) => {
+    if (!validateField(field) && !firstBad) firstBad = field
+  })
+  if (firstBad) {
+    const bad = firstBad as HTMLElement
+    bad.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    bad.querySelector<HTMLElement>('input, select, textarea')?.focus({ preventScroll: true })
+    return false
+  }
+  return true
+}
+
+/** Progress indicator for the multi-step application form. */
+export function Stepper({ steps, current }: { steps: string[]; current: number }) {
+  const pct = Math.round(((current + 1) / steps.length) * 100)
+  return (
+    <div className="mb-8">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-sm font-semibold text-ink">
+          Step {current + 1} of {steps.length}
+        </span>
+        <span className="text-sm text-muted text-right">{steps[current]}</span>
+      </div>
+      <div className="h-2 w-full bg-sand rounded-full overflow-hidden">
+        <div
+          className="h-full bg-ink rounded-full transition-all duration-300"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <ol className="hidden sm:flex mt-4 gap-2 justify-between">
+        {steps.map((s, i) => (
+          <li key={s} className="flex-1 flex flex-col items-center text-center">
+            <span
+              className={`w-7 h-7 grid place-items-center rounded-full text-[0.78rem] font-semibold border-[1.5px] ${
+                i < current
+                  ? 'bg-ink text-cream border-ink'
+                  : i === current
+                    ? 'border-ink text-ink'
+                    : 'border-line text-muted'
+              }`}
+            >
+              {i < current ? '✓' : i + 1}
+            </span>
+            <span
+              className={`mt-1.5 text-[0.72rem] leading-tight ${
+                i === current ? 'text-ink font-medium' : 'text-muted'
+              }`}
+            >
+              {s}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
+}
+
+/** Back / Next / Submit controls for the wizard. */
+export function WizardNav({
+  step,
+  total,
+  busy,
+  onBack,
+  onNext,
+}: {
+  step: number
+  total: number
+  busy: boolean
+  onBack: () => void
+  onNext: () => void
+}) {
+  const isLast = step === total - 1
+  return (
+    <div className="flex flex-wrap items-center gap-3 pt-6 mt-1 border-t border-line">
+      {step > 0 && (
+        <button
+          type="button"
+          onClick={onBack}
+          className="inline-flex items-center justify-center px-6 py-3.5 min-h-[52px] text-sm font-medium rounded-lg border border-ink text-ink hover:bg-ink hover:text-cream transition-colors duration-200"
+        >
+          ← Back
+        </button>
+      )}
+      {isLast ? (
+        <button
+          type="submit"
+          disabled={busy}
+          className="inline-flex items-center justify-center px-7 py-3.5 min-h-[52px] text-sm font-medium rounded-lg bg-ink text-cream hover:bg-ink-deep transition-colors duration-200 disabled:opacity-60"
+        >
+          {busy ? 'Submitting…' : 'Submit application'}
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={onNext}
+          className="inline-flex items-center justify-center px-7 py-3.5 min-h-[52px] text-sm font-medium rounded-lg bg-ink text-cream hover:bg-ink-deep transition-colors duration-200"
+        >
+          Continue →
+        </button>
+      )}
+      {isLast && (
+        <span className="text-[0.86rem] text-muted">
+          No fee is payable. We will never ask you for money.
+        </span>
+      )}
+    </div>
+  )
+}
+
 export function useEifForm(key: FormKey) {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [submitted, setSubmitted] = useState(false)
