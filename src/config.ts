@@ -70,10 +70,28 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/shikshasarathifoundation
 export const PROGRAMME = {
   name: 'Shiksha Sarathi Merit Scholarship 2026',
   cycle: '2026–27',
-  opens: '1 October 2026',
-  closes: '10 November 2026',
+  opens: '15 October 2026',
+  closes: '14 November 2026',
   /** Short form used in the announcement bar and receipts. */
-  window: '1 October – 10 November 2026',
+  window: '15 October – 14 November 2026',
+  examDate: '6 December 2026',
+  scholarships: 100,
+}
+
+/** Registered-entity details, from the Scheme and Policy Pack. */
+export const ORG = {
+  legalName: 'Shiksha Sarathi Foundation',
+  constitution: 'A company registered under Section 8 of the Companies Act, 2013',
+  registeredOffice:
+    'No. 1 & 2, Shop No. 2, 1st Floor, I Block, 1st Cross, R T Nagar, Bangalore North, Bangalore – 560032, Karnataka',
+  policiesEffective: '7 October 2026',
+}
+
+/** Single point of contact for grievances, data protection and child protection. */
+export const GRIEVANCE_OFFICER = {
+  name: 'Shaike Ibrahim',
+  email: CONTACT_EMAIL,
+  hours: 'Monday to Friday, 10:00 am – 6:00 pm',
 }
 
 /**

@@ -1,6 +1,7 @@
 import Logo from './Logo'
 import { SERVICES } from '../data/services'
-import { CONTACT_EMAIL, CONTACT_PHONE, IMPLEMENTATION_PARTNER, INSTAGRAM_URL } from '../config'
+import { CONTACT_EMAIL, CONTACT_PHONE, IMPLEMENTATION_PARTNER, INSTAGRAM_URL, ORG } from '../config'
+import { POLICIES } from '../data/policies'
 
 const LINK = 'block py-1.5 text-[#9FB0AB] hover:text-marigold transition-colors duration-200'
 
@@ -64,9 +65,28 @@ export default function Footer() {
             <a href="/partner" className={LINK}>
               Partner institutions
             </a>
+            <a href="/sponsor" className={LINK}>
+              Support us
+            </a>
             <a href="/about" className={LINK}>
               About us
             </a>
+          </div>
+        </div>
+
+        {/* Policies */}
+        <div className="mt-8 pt-6 border-t border-[#23453F]">
+          <h4 className="font-serif text-[1.02rem] text-white mb-3">Policies</h4>
+          <div className="flex flex-wrap gap-x-5 gap-y-1.5">
+            {POLICIES.map((p) => (
+              <a
+                key={p.slug}
+                href={`/${p.slug}`}
+                className="py-1 text-[0.86rem] text-[#9FB0AB] hover:text-marigold transition-colors duration-200"
+              >
+                {p.nav}
+              </a>
+            ))}
           </div>
         </div>
 
@@ -84,12 +104,14 @@ export default function Footer() {
             .
           </p>
           <p className="mt-3">
-            © 2026 Shikshasarathi Foundation · Bangalore, Karnataka, India. Scholarship amounts,
-            scholar numbers and dates shown are indicative until formally announced. Payment details
-            shown are placeholders pending the Foundation’s registration and bank account.
-            Mentorship, exam guidance and skill courses are arranged with partner organisations,
-            which set their own fees; the Foundation receives no commission or referral fee from any
-            of them.
+            © 2026 {ORG.legalName} · {ORG.constitution}.
+          </p>
+          <p className="mt-2">Registered office: {ORG.registeredOffice}.</p>
+          <p className="mt-2">
+            The scholarship scheme is governed by the SSF Scholarship Scheme 2026–27 document.
+            Scholarship amounts, the number of awards and the dates shown relate to the 2026–27
+            academic year and may be revised for later years. The Foundation makes no charge at any
+            stage and takes no payment on this website.
           </p>
         </div>
       </div>

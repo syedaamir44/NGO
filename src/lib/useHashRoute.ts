@@ -11,6 +11,15 @@ export const PAGES = [
   'apply',
   'request',
   'partner',
+  'sponsor',
+  'privacy',
+  'terms',
+  'cookies',
+  'donation-policy',
+  'refund',
+  'grievance',
+  'child-protection',
+  'disclaimer',
 ] as const
 
 export type PageName = (typeof PAGES)[number]
@@ -91,6 +100,46 @@ export const META: Record<PageName, { title: string; description: string }> = {
     title: 'Partner With Us — Shikshasarathi Foundation',
     description:
       'For schools, colleges and NGOs: nominate students, host a session, and help us reach students before the decision is made.',
+  },
+  sponsor: {
+    title: 'Support Us — Shikshasarathi Foundation',
+    description:
+      'Fund a scholar under the SSF Scholarship Scheme. Register your interest and the team will reach out — no payment is taken on this site.',
+  },
+  privacy: {
+    title: 'Privacy Policy — Shikshasarathi Foundation',
+    description:
+      'What personal data the Foundation collects, why, how it is protected, and the rights you have under the Digital Personal Data Protection Act, 2023.',
+  },
+  terms: {
+    title: 'Terms of Use — Shikshasarathi Foundation',
+    description: 'The terms that govern your use of the Shikshasarathi Foundation website.',
+  },
+  cookies: {
+    title: 'Cookie Policy — Shikshasarathi Foundation',
+    description: 'Which cookies this website uses, why, and the choice you have.',
+  },
+  'donation-policy': {
+    title: 'Donation Policy — Shikshasarathi Foundation',
+    description:
+      'How donations are used, the status of 80G registration, and the Foundation’s rules on accepting and recognising contributions.',
+  },
+  refund: {
+    title: 'Refund and Cancellation Policy — Shikshasarathi Foundation',
+    description: 'Nothing is sold on this website. How donation refunds are handled in the rare cases they apply.',
+  },
+  grievance: {
+    title: 'Grievance Redressal Policy — Shikshasarathi Foundation',
+    description: 'How to raise a grievance with the Foundation and how it is handled.',
+  },
+  'child-protection': {
+    title: 'Child Protection and Safeguarding Policy — Shikshasarathi Foundation',
+    description:
+      'How the Foundation protects the children who apply to its scholarship scheme, and how to report a concern.',
+  },
+  disclaimer: {
+    title: 'Disclaimer — Shikshasarathi Foundation',
+    description: 'General information about the Foundation website and its scholarship scheme.',
   },
 }
 

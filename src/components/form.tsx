@@ -839,7 +839,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
     title: 'Student details',
     fields: [
       'Full name', 'Date of birth', 'Gender', 'Religion', 'Category',
-      'Aadhaar number', 'PAN number', 'Mobile number', 'Email', 'Karnataka connection',
+      'Aadhaar number', 'Mobile number', 'Email', 'Karnataka connection',
     ],
   },
   { title: 'Address', fields: ['Address', 'City or town', 'District', 'State', 'PIN code'] },
@@ -868,6 +868,13 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   {
     title: 'Your situation',
     fields: ['Why you need this scholarship', 'What you want to study', 'Also interested in'],
+  },
+  {
+    title: 'Parent / guardian consent',
+    fields: [
+      'Parent/guardian name', 'Relationship to applicant', 'Parent/guardian mobile',
+      'Parent/guardian email', 'Parent consent',
+    ],
   },
 ]
 
