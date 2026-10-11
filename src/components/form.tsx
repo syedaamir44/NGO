@@ -885,6 +885,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
       'Current class', 'Present college', 'Board', 'Stream', 'Competitive exams',
       'Competitive exam (other)', 'Class 11 college', 'Class 11 percentage',
       'Class 10 school', 'Class 10 board', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
+      'Reference teacher name', 'Reference teacher mobile',
     ],
   },
   { title: 'Fees', fields: ['Admission fee', 'Tuition fee'] },

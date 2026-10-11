@@ -260,6 +260,32 @@ export default function ApplyPage() {
                 >
                   <AcademicSection />
                 </Fieldset>
+
+                <Fieldset
+                  legend="Teacher reference"
+                  note="Give one teacher who knows your work and can speak for you. We may call them for a short reference during shortlisting."
+                >
+                  <Grid2>
+                    <TextField
+                      full
+                      name="Reference teacher name"
+                      label="Teacher’s name"
+                      required
+                      placeholder="Full name of the teacher"
+                      hint="A teacher from your school or college who knows your work"
+                    />
+                    <TextField
+                      name="Reference teacher mobile"
+                      label="Teacher’s mobile number"
+                      type="tel"
+                      required
+                      numeric
+                      maxLength={10}
+                      rule="mobile"
+                      placeholder="10-digit number"
+                    />
+                  </Grid2>
+                </Fieldset>
               </div>
 
               {/* ---------- Step 4 — Fees + Family ---------- */}
