@@ -13,8 +13,7 @@ import ApplyPage from './pages/ApplyPage'
 import RequestPage from './pages/RequestPage'
 import PartnerPage from './pages/PartnerPage'
 import SponsorPage from './pages/SponsorPage'
-import PolicyPage from './pages/PolicyPage'
-import { POLICY_SLUGS } from './data/policies'
+import MentorPage from './pages/MentorPage'
 import { useHashRoute, SERVICE_PAGES, type ServiceKey } from './lib/useHashRoute'
 
 function Home() {
@@ -23,8 +22,8 @@ function Home() {
       <Hero />
       <ServicesOverview />
       <WorkWithUs />
-      <Faq />
       <CtaBand />
+      <Faq />
     </>
   )
 }
@@ -33,7 +32,6 @@ export default function App() {
   const page = useHashRoute()
 
   const isService = (SERVICE_PAGES as readonly string[]).includes(page)
-  const isPolicy = (POLICY_SLUGS as readonly string[]).includes(page)
 
   return (
     <div className="min-h-screen bg-cream overflow-x-hidden">
@@ -47,7 +45,7 @@ export default function App() {
         {page === 'request' && <RequestPage />}
         {page === 'partner' && <PartnerPage />}
         {page === 'sponsor' && <SponsorPage />}
-        {isPolicy && <PolicyPage key={page} slug={page} />}
+        {page === 'mentor' && <MentorPage />}
       </main>
       <Footer />
       <AnnouncementModal />

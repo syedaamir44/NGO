@@ -1,6 +1,7 @@
 import { useRef, useState, type ReactNode, type FormEvent } from 'react'
 import { FORM_ENDPOINTS, CONTACT_EMAIL, CONTACT_PHONE, type FormKey } from '../config'
 import { Label } from './ui'
+import { PU_BOARDS, CLASS10_BOARDS, COLLEGES } from '../data/suggestions'
 
 /* ==================================================================
    Page header — the forest band at the top of every inner page
@@ -117,6 +118,7 @@ export function TextField({
   maxLength,
   rule,
   inputMode,
+  suggestions,
 }: BaseProps & {
   type?: 'text' | 'email' | 'tel' | 'number' | 'date'
   placeholder?: string
@@ -131,8 +133,11 @@ export function TextField({
   /** A named validation rule applied on submit. */
   rule?: FieldRule
   inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email'
+  /** Type-ahead suggestions (free text still allowed). */
+  suggestions?: string[]
 }) {
   const id = `f-${name.replace(/\W+/g, '-').toLowerCase()}`
+  const listId = suggestions ? `${id}-list` : undefined
   // Keep a digits-only field digits-only as the person types, and enforce the
   // length cap on paste as well as on keystroke.
   const filterDigits = numeric
@@ -162,9 +167,17 @@ export function TextField({
         inputMode={inputMode || (numeric ? 'numeric' : undefined)}
         onInput={filterDigits}
         data-rule={rule}
+        list={listId}
         style={style}
         className={CONTROL}
       />
+      {suggestions && (
+        <datalist id={listId}>
+          {suggestions.map((s) => (
+            <option key={s} value={s} />
+          ))}
+        </datalist>
+      )}
     </FieldShell>
   )
 }
@@ -220,7 +233,8 @@ export function SelectField({
  * Competitive exams offered for each stream. Shown once a stream is picked.
  */
 const EXAMS_BY_STREAM: Record<string, string[]> = {
-  Science: ['JEE (Main / Advanced)', 'KCET', 'NEET', 'CUET', 'Other / not decided yet'],
+  // Science students must pick a specific exam — no "not decided" option.
+  Science: ['JEE (Main / Advanced)', 'KCET', 'NEET', 'CUET'],
   Commerce: [
     'CA Foundation',
     'CS Foundation',
@@ -302,12 +316,15 @@ export function AcademicSection() {
             name="Present college"
             label={`Name of your present college${is11 ? ' (class 11)' : ' (class 12)'}`}
             required
+            suggestions={COLLEGES}
+            hint="Start typing — pick from the list or type your own"
           />
           <TextField
             name="Board"
             label={is11 ? 'Board of your present college' : 'Board of your class 12 / present college'}
             required
             placeholder="e.g. Karnataka PU Board, CBSE, ICSE"
+            suggestions={PU_BOARDS}
           />
 
           {is12 && (
@@ -318,6 +335,7 @@ export function AcademicSection() {
                 label="Name of the college where you studied class 11"
                 required
                 hint="If it is the same as your present college, write the same name again"
+                suggestions={COLLEGES}
               />
               <TextField
                 name="Class 11 percentage"
@@ -335,6 +353,13 @@ export function AcademicSection() {
           )}
 
           <TextField full name="Class 10 school" label="Name of your class 10 school" required />
+          <TextField
+            name="Class 10 board"
+            label="Board of class 10"
+            required
+            placeholder="e.g. Karnataka SSLC, CBSE, ICSE"
+            suggestions={CLASS10_BOARDS}
+          />
           <TextField
             name="Class 10 year of passing"
             label="Year of passing class 10"
@@ -595,8 +620,23 @@ function validateField(field: Element): boolean {
       return false
     }
 
-    if (control.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-      return bad('Please enter a valid email address.')
+    if (control.type === 'email') {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+        return bad('Please enter a valid email address.')
+      }
+      const domain = value.split('@')[1].toLowerCase()
+      const sld = domain.split('.')[0]
+      // Reject obvious placeholder / test domains — students must give a real
+      // mailbox (Gmail, Yahoo, Outlook, Rediffmail, etc.), since results go here.
+      const FAKE = new Set([
+        'abc', 'xyz', 'test', 'tests', 'testing', 'example', 'examples', 'sample',
+        'samples', 'demo', 'demos', 'fake', 'dummy', 'temp', 'tempmail', 'asdf',
+        'qwerty', 'aaa', 'abcd', 'abcde', 'nomail', 'noemail', 'none', 'null',
+        'email', 'mail', 'domain', 'yourname', 'name', '123', '1234',
+      ])
+      if (FAKE.has(sld) || /^mailinator|^10minutemail|^guerrilla/.test(domain)) {
+        return bad('Please use a real email address, e.g. yourname@gmail.com.')
+      }
     }
 
     switch (control.dataset.rule) {
@@ -839,7 +879,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
     title: 'Student details',
     fields: [
       'Full name', 'Date of birth', 'Gender', 'Religion', 'Category',
-      'Aadhaar number', 'Mobile number', 'Email', 'Karnataka connection',
+      'Aadhaar number', 'PAN number', 'Mobile number', 'Email', 'Karnataka connection',
     ],
   },
   { title: 'Address', fields: ['Address', 'City or town', 'District', 'State', 'PIN code'] },
@@ -848,7 +888,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
     fields: [
       'Current class', 'Present college', 'Board', 'Stream', 'Competitive exams',
       'Competitive exam (other)', 'Class 11 college', 'Class 11 percentage',
-      'Class 10 school', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
+      'Class 10 school', 'Class 10 board', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
     ],
   },
   { title: 'Fees', fields: ['Admission fee', 'Tuition fee'] },
@@ -857,7 +897,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
     fields: [
       "Father's name", "Father's education qualification", "Father's occupation",
       "Mother's name", "Mother's education qualification", "Mother's occupation",
-      'Guardian name and details', 'Annual family income', 'Dependents',
+      'Guardian name and details', 'Annual family income', 'Family members including self',
     ],
   },
   { title: 'Bank account', fields: ['Bank account number', 'IFSC code', 'Bank branch', 'Bank name'] },
@@ -869,19 +909,108 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
     title: 'Your situation',
     fields: ['Why you need this scholarship', 'What you want to study', 'Also interested in'],
   },
-  {
-    title: 'Parent / guardian consent',
-    fields: [
-      'Parent/guardian name', 'Relationship to applicant', 'Parent/guardian mobile',
-      'Parent/guardian email', 'Parent consent',
-    ],
-  },
 ]
 
 const LONG_FIELDS = new Set([
   'Address', 'Guardian name and details', 'Co-curricular activities',
   'Why you need this scholarship', 'What you want to study',
 ])
+
+/**
+ * Print / save-as-PDF of the acknowledgment. Builds a self-contained HTML
+ * document and prints it through a hidden iframe — far more reliable across
+ * desktop and mobile browsers than hiding the page with @media print, which
+ * frequently produced a blank page on phones.
+ */
+function printAcknowledgment(
+  data: Record<string, string>,
+  reference: string | null,
+  programme: string,
+) {
+  const esc = (s: unknown) =>
+    String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string))
+  const has = (k: string) => (data[k] || '').trim().length > 0
+  const submittedOn = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
+  const origin = typeof window !== 'undefined' ? window.location.origin : ''
+
+  const groups = ACK_GROUPS.map((g) => {
+    const rows = g.fields.filter(has)
+    if (!rows.length) return ''
+    const body = rows
+      .map(
+        (k) =>
+          `<tr><td class="k">${esc(k)}</td><td class="v">${esc(data[k])}</td></tr>`,
+      )
+      .join('')
+    return `<div class="grp"><div class="gh">${esc(g.title)}</div><table>${body}</table></div>`
+  }).join('')
+
+  const html = `<!doctype html><html><head><meta charset="utf-8">
+<title>Acknowledgment ${esc(reference || '')}</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: #12403A; margin: 0; padding: 22px; }
+  .hd { display:flex; align-items:center; gap:12px; border-bottom:2px solid #12403A; padding-bottom:12px; }
+  .hd img { height:44px; width:auto; }
+  .org { font-size:19px; font-weight:bold; }
+  .sub { font-family: Arial, sans-serif; font-size:11px; color:#615C52; margin-top:2px; }
+  h1 { font-size:17px; text-align:center; margin:16px 0 10px; font-weight:normal; }
+  .idbox { display:flex; border:1.5px solid #12403A; margin-bottom:12px; }
+  .idbox > div { padding:8px 12px; flex:1; }
+  .idbox > div:first-child { border-right:1.5px solid #12403A; }
+  .lbl { font-family:Arial, sans-serif; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:#615C52; }
+  .ref { font-size:18px; color:#A96C10; word-break:break-all; }
+  .note { font-family:Arial, sans-serif; font-size:12px; color:#615C52; line-height:1.5; margin:10px 0; }
+  .grp { margin-top:14px; page-break-inside:avoid; }
+  .gh { font-size:15px; border-bottom:2px solid #12403A; padding-bottom:4px; margin-bottom:4px; }
+  table { width:100%; border-collapse:collapse; }
+  td { padding:5px 0; border-bottom:1px solid #DCD1BC; vertical-align:top; font-family:Arial, sans-serif; font-size:12.5px; }
+  td.k { width:42%; text-transform:uppercase; font-size:10.5px; letter-spacing:.04em; color:#615C52; }
+  td.v { color:#0B2B27; }
+  .foot { font-family:Arial, sans-serif; font-size:11px; color:#615C52; margin-top:14px; border-top:1px solid #DCD1BC; padding-top:8px; }
+</style></head><body>
+  <div class="hd">
+    <img src="${origin}/logo.png" alt="Shiksha Sarathi Foundation" onerror="this.style.display='none'">
+    <div><div class="org">Shiksha Sarathi Foundation</div>
+    <div class="sub">Bangalore, Karnataka &middot; ${esc(CONTACT_EMAIL)} &middot; ${esc(CONTACT_PHONE)}</div></div>
+  </div>
+  <h1>${esc(programme)} — Application Acknowledgment</h1>
+  <div class="idbox">
+    <div><div class="lbl">Application ID</div><div class="ref">${esc(reference || 'Recorded')}</div></div>
+    <div><div class="lbl">Submitted on</div><div style="font-family:Arial,sans-serif;font-size:13px;margin-top:3px;">${esc(submittedOn)}</div></div>
+  </div>
+  <div class="note">Dear ${esc(data['Full name'] || 'Applicant')}, your application has been received. Keep this acknowledgment and quote the Application ID in any message to us. No fee is payable at any stage.</div>
+  ${groups}
+  ${has('Declaration') ? '<div class="foot">Declaration confirmed: the applicant has certified that the details are true and understands that applying is free and that false information disqualifies the application.</div>' : ''}
+</body></html>`
+
+  const iframe = document.createElement('iframe')
+  iframe.setAttribute('aria-hidden', 'true')
+  iframe.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;'
+  document.body.appendChild(iframe)
+  const win = iframe.contentWindow
+  if (!win) return
+  win.document.open()
+  win.document.write(html)
+  win.document.close()
+  const run = () => {
+    try {
+      win.focus()
+      win.print()
+    } catch {
+      /* ignore */
+    }
+    setTimeout(() => {
+      try {
+        document.body.removeChild(iframe)
+      } catch {
+        /* ignore */
+      }
+    }, 1000)
+  }
+  // Give the logo image and layout a moment to settle before printing.
+  setTimeout(run, 400)
+}
 
 /**
  * The printable application acknowledgment. Lays out the whole submission with
@@ -919,7 +1048,7 @@ export function ApplicationReceipt({
     <div id="app-receipt" className="mt-6 border-[1.5px] border-ink bg-white">
       {/* Header */}
       <div className="px-5 sm:px-7 py-5 border-b-2 border-ink">
-        <img src="/logo.png" alt="Shikshasarathi Foundation" className="h-10 w-auto" />
+        <img src="/logo.png" alt="Shiksha Sarathi Foundation" className="h-10 w-auto" />
         <div className="mt-2 text-[0.78rem] text-muted leading-snug">
           Bangalore, Karnataka · {CONTACT_EMAIL} · {CONTACT_PHONE}
         </div>
@@ -995,7 +1124,7 @@ export function ApplicationReceipt({
         <div className="eif-noprint mt-6 flex flex-wrap gap-3">
           <button
             type="button"
-            onClick={() => window.print()}
+            onClick={() => printAcknowledgment(data, reference, programme)}
             className="inline-flex items-center justify-center px-6 py-3 min-h-[48px] text-sm font-medium rounded-lg bg-ink text-cream hover:bg-ink-deep transition-colors duration-200"
           >
             Download / Print acknowledgment
@@ -1005,6 +1134,42 @@ export function ApplicationReceipt({
           </span>
         </div>
       </div>
+    </div>
+  )
+}
+
+/**
+ * Read-only summary of everything entered, shown on the Review step so the
+ * applicant can check before submitting. Built from the form's live data.
+ */
+export function ReviewSummary({ data }: { data: Record<string, string> }) {
+  const has = (k: string) => (data[k] || '').trim().length > 0
+  return (
+    <div className="border border-line rounded-sm bg-[#F8F5EE] p-4 sm:p-5">
+      <p className="text-sm text-muted mb-4">
+        Please check your details below. Use <strong className="text-ink">Back</strong> to change
+        anything, then accept the declaration and submit.
+      </p>
+      {ACK_GROUPS.map((g) => {
+        const rows = g.fields.filter(has)
+        if (!rows.length) return null
+        return (
+          <div key={g.title} className="mt-4 first:mt-0">
+            <div className="font-serif text-[1rem] text-ink-deep border-b border-ink pb-1 mb-1">
+              {g.title}
+            </div>
+            {rows.map((k) => (
+              <div
+                key={k}
+                className="py-1.5 border-b border-line last:border-b-0 sm:grid sm:grid-cols-[40%_1fr] sm:gap-3"
+              >
+                <div className="text-[0.74rem] uppercase tracking-[0.05em] text-muted">{k}</div>
+                <div className="text-[14px] text-ink-deep break-words">{data[k]}</div>
+              </div>
+            ))}
+          </div>
+        )
+      })}
     </div>
   )
 }

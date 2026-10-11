@@ -98,7 +98,7 @@ export const SERVICES: Service[] = [
     ],
     faqs: [
       {
-        q: 'Does Shikshasarathi Foundation conduct the mentorship itself?',
+        q: 'Does Shiksha Sarathi Foundation conduct the mentorship itself?',
         a: 'No. We arrange it with partner mentors and organisations who specialise in this work, and we match you with the one that suits your situation. What we do ourselves is understand your case, find the right person for it, arrange support with the cost where it is needed, and follow up afterwards.',
       },
       {

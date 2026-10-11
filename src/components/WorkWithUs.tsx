@@ -19,6 +19,24 @@ const BLOCKS = [
     cta: 'Refer students to us →',
     href: '/partner',
   },
+  {
+    title: 'Donations',
+    paras: [
+      'Fund a scholar directly. A contribution goes to the SSM Scholarship award pool — merit scholarships for class 11 and 12 students across Karnataka, paid into a scholar’s own bank account.',
+      'No payment is taken on this website. Tell us how you would like to help and the team will reach out and explain exactly how it is used.',
+    ],
+    cta: 'Support a student →',
+    href: '/sponsor',
+  },
+  {
+    title: 'Become a mentor',
+    paras: [
+      'Give a little of your free time. A short conversation about a course, a career or an exam can change a student’s direction — and you already know things they have no way to find out.',
+      'Tell us your field and how much time you can spare, and we will match you with students who need exactly that.',
+    ],
+    cta: 'Mentor a student →',
+    href: '/mentor',
+  },
 ]
 
 export default function WorkWithUs() {
@@ -26,7 +44,7 @@ export default function WorkWithUs() {
     <Section className="bg-ink text-[#E7DECC]">
       <Label tone="light">Work with us</Label>
       <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight text-white">
-        Two ways to reach a student before the decision is made
+        Four ways to help a student before the decision is made
       </h2>
 
       <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-9">

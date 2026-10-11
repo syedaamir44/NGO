@@ -11,6 +11,7 @@ import {
   SetupNotice,
   SuccessPanel,
   ApplicationReceipt,
+  ReviewSummary,
   Stepper,
   WizardNav,
   validateStep,
@@ -39,6 +40,7 @@ const STEP_LABELS = [
   'Academics',
   'Fees & family',
   'Bank & extra',
+  'Your situation',
   'Review & submit',
 ]
 
@@ -46,12 +48,28 @@ export default function ApplyPage() {
   const { formRef, submitted, delivered, busy, reference, submittedData, onSubmit, onInput } =
     useEifForm('apply')
   const [step, setStep] = useState(0)
+  const [previewData, setPreviewData] = useState<Record<string, string>>({})
   const total = STEP_LABELS.length
+
+  // Collect everything typed so far (across all mounted steps) for the preview.
+  const collect = () => {
+    const form = formRef.current
+    const d: Record<string, string> = {}
+    if (form) {
+      new FormData(form).forEach((value, k) => {
+        const v = String(value)
+        d[k] = k in d ? `${d[k]}, ${v}` : v
+      })
+    }
+    return d
+  }
 
   const goNext = () => {
     const el = formRef.current?.querySelector(`[data-step="${step}"]`) ?? null
     if (!validateStep(el)) return
-    setStep((s) => Math.min(s + 1, total - 1))
+    const next = Math.min(step + 1, total - 1)
+    if (next === total - 1) setPreviewData(collect())
+    setStep(next)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
   const goBack = () => {
@@ -181,6 +199,14 @@ export default function ApplyPage() {
                       required
                       autoComplete="email"
                       hint="Shortlisting and results are emailed here"
+                    />
+                    <TextField
+                      name="PAN number"
+                      label="PAN number"
+                      maxLength={10}
+                      placeholder="e.g. ABCDE1234F"
+                      style={{ textTransform: 'uppercase' }}
+                      hint="Optional — leave blank if you do not have a PAN yet"
                     />
                     <SelectField
                       full
@@ -329,8 +355,8 @@ export default function ApplyPage() {
                       hint="Enter the amount in rupees, as stated on your income certificate. Applications above ₹8,00,000 cannot be shortlisted for this programme."
                     />
                     <TextField
-                      name="Dependents"
-                      label="Number of people dependent on this income"
+                      name="Family members including self"
+                      label="Number of family members, including yourself"
                       type="number"
                       min={1}
                       placeholder="e.g. 5"
@@ -443,87 +469,15 @@ export default function ApplyPage() {
                     scholarship application.
                   </p>
                 </Fieldset>
+              </div>
 
-                <Fieldset
-                  legend="Notice and parent/guardian consent"
-                  note="Because almost every applicant is under eighteen, a parent or legal guardian gives consent here. The law requires this before we can process the application."
-                >
-                  <div className="mb-5 border-[1.5px] border-line bg-[#F8F5EE] px-4 py-4 rounded-sm text-[0.9rem] text-ink-deep leading-relaxed max-h-64 overflow-y-auto">
-                    <strong className="block mb-2 text-[0.72rem] uppercase tracking-[0.12em] text-muted">
-                      Notice — personal data
-                    </strong>
-                    Shiksha Sarathi Foundation will process the following personal data about the
-                    applicant for the purpose of administering the SSF Scholarship Scheme 2026–27:
-                    name, date of birth, gender, mobile number, email address, residential address,
-                    college name, district, college type, stream and combination, marks in the
-                    qualifying examination, responses and score in the SSF Scholarship Examination,
-                    photograph, proof of identity and date of birth, proof of admission, and, where a
-                    relaxation is claimed, a disability certificate. We also process the parent or
-                    guardian’s name, occupation and annual income, and, on selection, the scholar’s
-                    bank account number and IFSC code. We use this data only to check eligibility,
-                    conduct the examination, prepare and publish the merit list, verify documents, pay
-                    the scholarship into the scholar’s own bank account, communicate about the scheme,
-                    and keep the records audit and law require. You may withdraw consent at any time,
-                    as easily as it was given, by writing to{' '}
-                    <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
-                      {CONTACT_EMAIL}
-                    </a>
-                    . You may ask for a summary of the data held, have it corrected, or have it
-                    erased, and may complain to us and to the Data Protection Board of India. Full
-                    details are in our{' '}
-                    <a href="/privacy" className="underline">
-                      Privacy Policy
-                    </a>
-                    .
-                  </div>
-
-                  <Grid2>
-                    <TextField
-                      name="Parent/guardian name"
-                      label="Parent or guardian’s full name"
-                      required
-                      style={{ textTransform: 'uppercase' }}
-                    />
-                    <TextField
-                      name="Relationship to applicant"
-                      label="Relationship to the applicant"
-                      required
-                      placeholder="e.g. Father, Mother, Guardian"
-                    />
-                    <TextField
-                      name="Parent/guardian mobile"
-                      label="Parent or guardian’s mobile number"
-                      type="tel"
-                      required
-                      numeric
-                      maxLength={10}
-                      rule="mobile"
-                      placeholder="10-digit number"
-                      hint="Separate from the applicant’s number, where possible"
-                    />
-                    <TextField
-                      name="Parent/guardian email"
-                      label="Parent or guardian’s email address"
-                      type="email"
-                      placeholder="Optional"
-                    />
-                  </Grid2>
-
-                  <ChoiceGroup
-                    name="Parent consent"
-                    type="checkbox"
-                    required
-                    choices={[
-                      {
-                        value: 'Agreed',
-                        title: 'I give my consent as parent or legal guardian',
-                        note: 'I am the parent or legal guardian of the applicant. I have read the notice above and the Privacy Policy. I consent to the Foundation collecting and processing my child’s personal data, and my own, for the purposes set out and no other. I understand the final merit list (name, rank and college) is published if my child is selected; that I may withdraw this consent at any time; that the Foundation charges nothing and any demand for money in its name is fraudulent; and that renewal into a second year is subject to funds and is not guaranteed.',
-                      },
-                    ]}
-                  />
+              {/* ---------- Step 7 — Review + Declaration ---------- */}
+              <div data-step={6} className={stepClass(6)}>
+                <Fieldset legend="Review your application">
+                  <ReviewSummary data={previewData} />
                 </Fieldset>
 
-                <Fieldset legend="Applicant declaration">
+                <Fieldset legend="Declaration">
                   <ChoiceGroup
                     name="Declaration"
                     type="checkbox"
@@ -531,8 +485,8 @@ export default function ApplyPage() {
                     choices={[
                       {
                         value: 'Agreed',
-                        title: 'I confirm the above and accept the scheme terms',
-                        note: 'The information I have given is true and complete. I am studying in Class 11 or Class 12 (First or Second PUC) at a recognised institution in Karnataka in 2026–27, as a regular full-time student. I have read the SSF Scholarship Scheme 2026–27 and accept its terms. I will appear for the SSF Scholarship Examination personally and will not let anyone appear in my place. I understand selection is purely on merit through a published rank list, that registration and the examination are free and the Foundation will never ask me for money, and that a scholarship obtained through a false statement will be cancelled and the amount recovered. My parent or guardian has given consent above.',
+                        title: 'I confirm the above details are true',
+                        note: 'I understand that applying is free of cost, that my details will be verified against my original documents, that selection is decided on merit and need through a published process, and that any scholarship awarded is to be used for my education. I give Shiksha Sarathi Foundation authorisation to use the data I have submitted to process this application. I understand that false information will disqualify my application.',
                       },
                     ]}
                   />

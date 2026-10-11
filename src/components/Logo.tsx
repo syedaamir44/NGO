@@ -9,7 +9,7 @@ export default function Logo({ className = 'w-6 h-6' }: { className?: string }) 
       fill="currentColor"
       className={className}
       role="img"
-      aria-label="Shikshasarathi Foundation"
+      aria-label="Shiksha Sarathi Foundation"
     >
       <path d="M 128 0 L 142 34 L 176 48 L 142 62 L 128 96 L 114 62 L 80 48 L 114 34 Z" />
       <path d="M 121 126 C 92 98, 46 94, 8 102 L 8 244 C 46 236, 92 240, 121 254 Z" />

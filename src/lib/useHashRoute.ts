@@ -12,14 +12,7 @@ export const PAGES = [
   'request',
   'partner',
   'sponsor',
-  'privacy',
-  'terms',
-  'cookies',
-  'donation-policy',
-  'refund',
-  'grievance',
-  'child-protection',
-  'disclaimer',
+  'mentor',
 ] as const
 
 export type PageName = (typeof PAGES)[number]
@@ -52,94 +45,64 @@ export function pathToPage(pathname: string): PageName {
 /** Per-page <head> content. Titles ~60 chars, descriptions ~150. */
 export const META: Record<PageName, { title: string; description: string }> = {
   home: {
-    title: 'Shikshasarathi Foundation — Merit Scholarships & Student Mentorship',
+    title: 'Shiksha Sarathi Foundation — SSM Scholarship & Student Mentorship',
     description:
-      'A non-profit offering merit scholarships and free education, career and competitive-exam mentorship for students from low-income families across Karnataka.',
+      'A non-profit offering the SSM Scholarship (Shiksha Sarathi Merit Scholarship) and free education, career and competitive-exam mentorship for students across Karnataka.',
   },
   about: {
-    title: 'About Us — Shikshasarathi Foundation',
+    title: 'About Us — Shiksha Sarathi Foundation',
     description:
       'Who we are, why we started, and how we fund scholarships and arrange mentorship for students who have the talent but not the means.',
   },
   scholarship: {
-    title: 'Shiksha Sarathi Merit Scholarship 2026 — Shikshasarathi Foundation',
+    title: 'SSM Scholarship 2026 — Shiksha Sarathi Foundation',
     description:
-      'Eligibility, selection, documents and dates for the Shiksha Sarathi Merit Scholarship 2026, with direct financial support paid when college fees fall due.',
+      'Eligibility, selection, documents and dates for the SSM Scholarship (Shiksha Sarathi Merit Scholarship) 2026, with direct financial support paid when college fees fall due.',
   },
   'education-counselling': {
-    title: 'Education Mentorship — Shikshasarathi Foundation',
+    title: 'Education Mentorship — Shiksha Sarathi Foundation',
     description:
       'Free guidance on which stream, which course and which college to choose, and what each choice actually leads to.',
   },
   'career-counselling': {
-    title: 'Career Mentorship — Shikshasarathi Foundation',
+    title: 'Career Mentorship — Shiksha Sarathi Foundation',
     description:
       'Free mentorship on what a job really involves, what it pays and what it demands — before a student spends years preparing for it.',
   },
   'exam-guidance': {
-    title: 'Competitive Exam Guidance — Shikshasarathi Foundation',
+    title: 'Competitive Exam Guidance — Shiksha Sarathi Foundation',
     description:
       'Guidance on CET, NEET, JEE, banking, SSC, railways and state-service exams — which one suits a student and how to prepare without wasting money.',
   },
   'skill-courses': {
-    title: 'Skill Enhancement Courses — Shikshasarathi Foundation',
+    title: 'Skill Enhancement Courses — Shiksha Sarathi Foundation',
     description:
       'Mentorship on short, practical skill courses that lead to real work, alongside a degree or instead of waiting for one.',
   },
   apply: {
-    title: 'Apply for the Scholarship — Shikshasarathi Foundation',
+    title: 'Apply for the Scholarship — Shiksha Sarathi Foundation',
     description:
-      'Apply for the Shiksha Sarathi Merit Scholarship 2026. Applying is free — the form takes details that match your documents.',
+      'Apply for the SSM Scholarship 2026 (Shiksha Sarathi Merit Scholarship). Applying is free — the form takes details that match your documents.',
   },
   request: {
-    title: 'Request Mentorship — Shikshasarathi Foundation',
+    title: 'Request Mentorship — Shiksha Sarathi Foundation',
     description:
       'Request a free education, career or competitive-exam mentorship session with the Foundation and its partner organisations.',
   },
   partner: {
-    title: 'Partner With Us — Shikshasarathi Foundation',
+    title: 'Partner With Us — Shiksha Sarathi Foundation',
     description:
       'For schools, colleges and NGOs: nominate students, host a session, and help us reach students before the decision is made.',
   },
   sponsor: {
-    title: 'Support Us — Shikshasarathi Foundation',
+    title: 'Donate / Support Us — Shiksha Sarathi Foundation',
     description:
-      'Fund a scholar under the SSF Scholarship Scheme. Register your interest and the team will reach out — no payment is taken on this site.',
+      'Fund a scholar under the SSM Scholarship. Register your interest and the team will reach out — no payment is taken on this site.',
   },
-  privacy: {
-    title: 'Privacy Policy — Shikshasarathi Foundation',
+  mentor: {
+    title: 'Become a Mentor — Shiksha Sarathi Foundation',
     description:
-      'What personal data the Foundation collects, why, how it is protected, and the rights you have under the Digital Personal Data Protection Act, 2023.',
-  },
-  terms: {
-    title: 'Terms of Use — Shikshasarathi Foundation',
-    description: 'The terms that govern your use of the Shikshasarathi Foundation website.',
-  },
-  cookies: {
-    title: 'Cookie Policy — Shikshasarathi Foundation',
-    description: 'Which cookies this website uses, why, and the choice you have.',
-  },
-  'donation-policy': {
-    title: 'Donation Policy — Shikshasarathi Foundation',
-    description:
-      'How donations are used, the status of 80G registration, and the Foundation’s rules on accepting and recognising contributions.',
-  },
-  refund: {
-    title: 'Refund and Cancellation Policy — Shikshasarathi Foundation',
-    description: 'Nothing is sold on this website. How donation refunds are handled in the rare cases they apply.',
-  },
-  grievance: {
-    title: 'Grievance Redressal Policy — Shikshasarathi Foundation',
-    description: 'How to raise a grievance with the Foundation and how it is handled.',
-  },
-  'child-protection': {
-    title: 'Child Protection and Safeguarding Policy — Shikshasarathi Foundation',
-    description:
-      'How the Foundation protects the children who apply to its scholarship scheme, and how to report a concern.',
-  },
-  disclaimer: {
-    title: 'Disclaimer — Shikshasarathi Foundation',
-    description: 'General information about the Foundation website and its scholarship scheme.',
+      'Give a little of your free time to guide a student. Tell us how you can help and the team will get in touch.',
   },
 }
 

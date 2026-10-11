@@ -82,7 +82,7 @@ export default function AboutPage() {
       <PageHeader
         crumb="About us"
         label="Non-profit · Karnataka"
-        title="About Shikshasarathi Foundation"
+        title="About Shiksha Sarathi Foundation"
         intro="A non-profit organisation working with students from economically weaker backgrounds, at the point where school ends and everything after it is decided."
       />
 
@@ -95,7 +95,7 @@ export default function AboutPage() {
               We work at the point where everything after school is decided
             </h2>
             <p className="mt-5 text-base text-muted leading-relaxed">
-              Shikshasarathi Foundation is a non-profit organisation registered as a Section 8 company
+              Shiksha Sarathi Foundation is a non-profit organisation registered as a Section 8 company
               under the Companies Act, 2013.
             </p>
             <p className="mt-4 text-base text-muted leading-relaxed">

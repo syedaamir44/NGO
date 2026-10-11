@@ -16,7 +16,7 @@ import { Label } from '../components/ui'
 import { CONTACT_EMAIL } from '../config'
 
 const ASK = [
-  'Nominate one teacher or staff member as your Shikshasarathi coordinator',
+  'Nominate one teacher or staff member as your Shiksha Sarathi coordinator',
   'Tell your students that the scholarship and the guidance services exist',
   'Circulate the application details once, in class or on your notice board',
   'If you are able, give us a room and an hour for a session on your campus',

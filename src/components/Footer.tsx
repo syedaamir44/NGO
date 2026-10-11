@@ -1,7 +1,6 @@
 import Logo from './Logo'
 import { SERVICES } from '../data/services'
-import { CONTACT_EMAIL, CONTACT_PHONE, IMPLEMENTATION_PARTNER, INSTAGRAM_URL, ORG } from '../config'
-import { POLICIES } from '../data/policies'
+import { CONTACT_EMAIL, CONTACT_PHONE, IMPLEMENTATION_PARTNER, INSTAGRAM_URL } from '../config'
 
 const LINK = 'block py-1.5 text-[#9FB0AB] hover:text-marigold transition-colors duration-200'
 
@@ -13,7 +12,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2.5">
               <Logo className="w-6 h-6 text-marigold" />
-              <h4 className="font-serif text-[1.02rem] text-white">Shikshasarathi Foundation</h4>
+              <h4 className="font-serif text-[1.02rem] text-white">Shiksha Sarathi Foundation</h4>
             </div>
             <p className="mt-3 leading-relaxed">
               A non-profit organisation supporting students from economically weaker backgrounds with
@@ -45,7 +44,7 @@ export default function Footer() {
           <div>
             <h4 className="font-serif text-[1.02rem] text-white mb-2">What we do</h4>
             <a href="/scholarship" className={LINK}>
-              Merit Scholarship
+              SSM Scholarship
             </a>
             {SERVICES.map((s) => (
               <a key={s.key} href={`/${s.key}`} className={LINK}>
@@ -66,27 +65,14 @@ export default function Footer() {
               Partner institutions
             </a>
             <a href="/sponsor" className={LINK}>
-              Support us
+              Donate / support us
+            </a>
+            <a href="/mentor" className={LINK}>
+              Become a mentor
             </a>
             <a href="/about" className={LINK}>
               About us
             </a>
-          </div>
-        </div>
-
-        {/* Policies */}
-        <div className="mt-8 pt-6 border-t border-[#23453F]">
-          <h4 className="font-serif text-[1.02rem] text-white mb-3">Policies</h4>
-          <div className="flex flex-wrap gap-x-5 gap-y-1.5">
-            {POLICIES.map((p) => (
-              <a
-                key={p.slug}
-                href={`/${p.slug}`}
-                className="py-1 text-[0.86rem] text-[#9FB0AB] hover:text-marigold transition-colors duration-200"
-              >
-                {p.nav}
-              </a>
-            ))}
           </div>
         </div>
 
@@ -104,14 +90,10 @@ export default function Footer() {
             .
           </p>
           <p className="mt-3">
-            © 2026 {ORG.legalName} · {ORG.constitution}.
-          </p>
-          <p className="mt-2">Registered office: {ORG.registeredOffice}.</p>
-          <p className="mt-2">
-            The scholarship scheme is governed by the SSF Scholarship Scheme 2026–27 document.
-            Scholarship amounts, the number of awards and the dates shown relate to the 2026–27
-            academic year and may be revised for later years. The Foundation makes no charge at any
-            stage and takes no payment on this website.
+            © 2026 Shiksha Sarathi Foundation · Bangalore, Karnataka, India. The Foundation makes no
+            charge at any stage and takes no payment on this website. Mentorship, exam guidance and
+            skill courses are part-funded by the Foundation; where a partner sets a fee, the
+            Foundation receives no commission or referral fee from any of them.
           </p>
         </div>
       </div>

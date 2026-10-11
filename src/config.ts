@@ -26,7 +26,7 @@
  */
 export const HERO_IMAGE_URL = ''
 
-export type FormKey = 'apply' | 'request' | 'partner' | 'sponsor'
+export type FormKey = 'apply' | 'request' | 'partner' | 'sponsor' | 'mentor'
 
 /**
  * THE FORMS — wired to Supabase.
@@ -57,6 +57,7 @@ export const FORM_ENDPOINTS: Record<FormKey, string> = {
   request: `${SUBMIT_FN}?form=request`,
   partner: `${SUBMIT_FN}?form=partner`,
   sponsor: `${SUBMIT_FN}?form=sponsor`,
+  mentor: `${SUBMIT_FN}?form=mentor`,
 }
 
 export const CONTACT_EMAIL = 'connect@shikshasarathifoundation.org'
@@ -68,30 +69,15 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/shikshasarathifoundation
 
 /** The current scholarship programme. Update each cycle. */
 export const PROGRAMME = {
-  name: 'Shiksha Sarathi Merit Scholarship 2026',
+  /** Short display name used in nav, cards, CTAs and the form. */
+  name: 'SSM Scholarship 2026',
+  /** Full name, spelled out, for the scholarship page intro and SEO. */
+  fullName: 'Shiksha Sarathi Merit Scholarship 2026',
   cycle: '2026–27',
-  opens: '15 October 2026',
-  closes: '14 November 2026',
+  opens: '1 October 2026',
+  closes: '15 November 2026',
   /** Short form used in the announcement bar and receipts. */
-  window: '15 October – 14 November 2026',
-  examDate: '6 December 2026',
-  scholarships: 100,
-}
-
-/** Registered-entity details, from the Scheme and Policy Pack. */
-export const ORG = {
-  legalName: 'Shiksha Sarathi Foundation',
-  constitution: 'A company registered under Section 8 of the Companies Act, 2013',
-  registeredOffice:
-    'No. 1 & 2, Shop No. 2, 1st Floor, I Block, 1st Cross, R T Nagar, Bangalore North, Bangalore – 560032, Karnataka',
-  policiesEffective: '7 October 2026',
-}
-
-/** Single point of contact for grievances, data protection and child protection. */
-export const GRIEVANCE_OFFICER = {
-  name: 'Shaike Ibrahim',
-  email: CONTACT_EMAIL,
-  hours: 'Monday to Friday, 10:00 am – 6:00 pm',
+  window: '1 October – 15 November 2026',
 }
 
 /**
