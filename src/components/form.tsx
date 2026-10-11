@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode, type FormEvent } from 'react'
 import { FORM_ENDPOINTS, CONTACT_EMAIL, CONTACT_PHONE, type FormKey } from '../config'
 import { Label } from './ui'
-import { PU_BOARDS, CLASS10_BOARDS, COLLEGES } from '../data/suggestions'
+import { PU_BOARDS, CLASS10_BOARDS } from '../data/suggestions'
 
 /* ==================================================================
    Page header — the forest band at the top of every inner page
@@ -316,15 +316,13 @@ export function AcademicSection() {
             name="Present college"
             label={`Name of your present college${is11 ? ' (class 11)' : ' (class 12)'}`}
             required
-            suggestions={COLLEGES}
-            hint="Start typing — pick from the list or type your own"
+            placeholder="Type your college name in full"
           />
-          <TextField
+          <SelectField
             name="Board"
             label={is11 ? 'Board of your present college' : 'Board of your class 12 / present college'}
             required
-            placeholder="e.g. Karnataka PU Board, CBSE, ICSE"
-            suggestions={PU_BOARDS}
+            options={PU_BOARDS}
           />
 
           {is12 && (
@@ -335,7 +333,6 @@ export function AcademicSection() {
                 label="Name of the college where you studied class 11"
                 required
                 hint="If it is the same as your present college, write the same name again"
-                suggestions={COLLEGES}
               />
               <TextField
                 name="Class 11 percentage"
@@ -353,12 +350,11 @@ export function AcademicSection() {
           )}
 
           <TextField full name="Class 10 school" label="Name of your class 10 school" required />
-          <TextField
+          <SelectField
             name="Class 10 board"
             label="Board of class 10"
             required
-            placeholder="e.g. Karnataka SSLC, CBSE, ICSE"
-            suggestions={CLASS10_BOARDS}
+            options={CLASS10_BOARDS}
           />
           <TextField
             name="Class 10 year of passing"

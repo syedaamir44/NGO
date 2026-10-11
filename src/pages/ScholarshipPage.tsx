@@ -332,12 +332,6 @@ export default function ScholarshipPage() {
             </div>
           ))}
         </div>
-
-        <div className="mt-8">
-          <Button href="/apply" variant="ink">
-            Apply Now →
-          </Button>
-        </div>
       </section>
 
       {/* ---------- Documents ---------- */}
