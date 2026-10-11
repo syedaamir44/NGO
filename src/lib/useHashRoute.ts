@@ -47,7 +47,7 @@ export const META: Record<PageName, { title: string; description: string }> = {
   home: {
     title: 'Shiksha Sarathi Foundation — SSM Scholarship & Student Mentorship',
     description:
-      'A non-profit offering the SSM Scholarship (Shiksha Sarathi Merit Scholarship) and free education, career and competitive-exam mentorship for students across Karnataka.',
+      'A non-profit offering the Shiksha Sarathi Merit Scholarship and free education, career and competitive-exam mentorship for students across Karnataka.',
   },
   about: {
     title: 'About Us — Shiksha Sarathi Foundation',
@@ -55,9 +55,9 @@ export const META: Record<PageName, { title: string; description: string }> = {
       'Who we are, why we started, and how we fund scholarships and arrange mentorship for students who have the talent but not the means.',
   },
   scholarship: {
-    title: 'SSM Scholarship 2026 — Shiksha Sarathi Foundation',
+    title: 'Shiksha Sarathi Merit Scholarship 2026',
     description:
-      'Eligibility, selection, documents and dates for the SSM Scholarship (Shiksha Sarathi Merit Scholarship) 2026, with direct financial support paid when college fees fall due.',
+      'Eligibility, selection, documents and dates for the Shiksha Sarathi Merit Scholarship 2026, with direct financial support paid when college fees fall due.',
   },
   'education-counselling': {
     title: 'Education Mentorship — Shiksha Sarathi Foundation',
@@ -82,7 +82,7 @@ export const META: Record<PageName, { title: string; description: string }> = {
   apply: {
     title: 'Apply for the Scholarship — Shiksha Sarathi Foundation',
     description:
-      'Apply for the SSM Scholarship 2026 (Shiksha Sarathi Merit Scholarship). Applying is free — the form takes details that match your documents.',
+      'Apply for the Shiksha Sarathi Merit Scholarship 2026. Applying is free — the form takes details that match your documents.',
   },
   request: {
     title: 'Request Mentorship — Shiksha Sarathi Foundation',
@@ -97,7 +97,7 @@ export const META: Record<PageName, { title: string; description: string }> = {
   sponsor: {
     title: 'Donate / Support Us — Shiksha Sarathi Foundation',
     description:
-      'Fund a scholar under the SSM Scholarship. Register your interest and the team will reach out — no payment is taken on this site.',
+      'Fund a scholar under the Shiksha Sarathi Merit Scholarship. Register your interest and the team will reach out — no payment is taken on this site.',
   },
   mentor: {
     title: 'Become a Mentor — Shiksha Sarathi Foundation',

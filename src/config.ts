@@ -69,10 +69,10 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/shikshasarathifoundation
 
 /** The current scholarship programme. Update each cycle. */
 export const PROGRAMME = {
-  /** Short display name used in nav, cards, CTAs and the form. */
-  name: 'SSM Scholarship 2026',
-  /** Full name, spelled out, for the scholarship page intro and SEO. */
-  fullName: 'Shiksha Sarathi Merit Scholarship 2026',
+  /** Full name — used everywhere it fits. */
+  name: 'Shiksha Sarathi Merit Scholarship 2026',
+  /** Short name — only for tight spots, e.g. the nav button. */
+  short: 'SSM Scholarship',
   cycle: '2026–27',
   opens: '1 October 2026',
   closes: '15 November 2026',

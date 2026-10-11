@@ -44,7 +44,7 @@ export default function Footer() {
           <div>
             <h4 className="font-serif text-[1.02rem] text-white mb-2">What we do</h4>
             <a href="/scholarship" className={LINK}>
-              SSM Scholarship
+              Shiksha Sarathi Merit Scholarship
             </a>
             {SERVICES.map((s) => (
               <a key={s.key} href={`/${s.key}`} className={LINK}>

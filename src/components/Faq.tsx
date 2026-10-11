@@ -4,7 +4,7 @@ import { CONTACT_EMAIL } from '../config'
 const FAQS: { q: string; a: string; open?: boolean }[] = [
   {
     q: 'What does Shiksha Sarathi Foundation actually provide?',
-    a: 'Two different things. The SSM Scholarship (Shiksha Sarathi Merit Scholarship), which we fund and award ourselves, and four guidance services — education mentorship, career mentorship, competitive exam guidance and add-on skill courses — which we part-fund for students who need them.',
+    a: 'Two different things. The Shiksha Sarathi Merit Scholarship, which we fund and award ourselves, and four guidance services — education mentorship, career mentorship, competitive exam guidance and add-on skill courses — which we part-fund for students who need them.',
     open: true,
   },
   {
@@ -20,7 +20,7 @@ const FAQS: { q: string; a: string; open?: boolean }[] = [
     a: 'No. We take no commission and no referral fee from any mentor, institute, college or coaching centre. That independence is deliberate: it is what allows us to recommend one honestly, and to tell a student that a course is not worth paying for.',
   },
   {
-    q: 'Who is eligible for the SSM Scholarship 2026?',
+    q: 'Who is eligible for the Shiksha Sarathi Merit Scholarship 2026?',
     a: 'Students currently studying in class 11 or class 12, with a total annual family income below ₹8 lakh, who scored at least 60% in their last completed year, and who study in or are domiciled in Karnataka. Full details are on the scholarship page.',
   },
   {

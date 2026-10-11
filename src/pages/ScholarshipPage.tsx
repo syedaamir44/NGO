@@ -68,7 +68,7 @@ const DOCUMENTS = [
   },
   {
     title: 'Admission proof',
-    body: 'Your fee structure and the latest fee receipt.',
+    body: 'Your current-year fee receipt or fee structure.',
   },
   {
     title: 'Caste certificate',
@@ -193,10 +193,10 @@ export default function ScholarshipPage() {
   return (
     <>
       <PageHeader
-        crumb="SSM Scholarship"
-        label="SSM Scholarship · Applications open"
+        crumb="Shiksha Sarathi Merit Scholarship"
+        label="Shiksha Sarathi Merit Scholarship · Applications open"
         title={PROGRAMME.name}
-        intro="The Shiksha Sarathi Merit Scholarship (SSM) — financial support for meritorious students from economically weaker backgrounds, so that money is never the reason a capable student stops studying."
+        intro="The Shiksha Sarathi Merit Scholarship — financial support for meritorious students from economically weaker backgrounds, so that money is never the reason a capable student stops studying."
       />
 
       {/* ---------- About ---------- */}
@@ -402,7 +402,7 @@ export default function ScholarshipPage() {
         <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14">
           <Label>Terms and conditions</Label>
           <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
-            The rules of the SSM Scholarship
+            The rules of the Shiksha Sarathi Merit Scholarship
           </h2>
           <p className="mt-4 max-w-2xl text-base text-muted leading-relaxed">
             These are the main conditions under which the scholarship is awarded and kept. Read them

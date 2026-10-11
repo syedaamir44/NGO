@@ -22,7 +22,7 @@ const BLOCKS = [
   {
     title: 'Donations',
     paras: [
-      'Fund a scholar directly. A contribution goes to the SSM Scholarship award pool — merit scholarships for class 11 and 12 students across Karnataka, paid into a scholar’s own bank account.',
+      'Fund a scholar directly. A contribution goes to the Shiksha Sarathi Merit Scholarship award pool — merit scholarships for class 11 and 12 students across Karnataka, paid into a scholar’s own bank account.',
       'No payment is taken on this website. Tell us how you would like to help and the team will reach out and explain exactly how it is used.',
     ],
     cta: 'Support a student →',

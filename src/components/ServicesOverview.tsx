@@ -5,7 +5,7 @@ import { SERVICES } from '../data/services'
 const CARDS = [
   {
     index: '01',
-    name: 'SSM Scholarship',
+    name: 'Shiksha Sarathi Merit Scholarship',
     href: '/scholarship',
     teaser:
       'Direct financial support for meritorious students from low-income families, paid when college fees actually fall due.',
