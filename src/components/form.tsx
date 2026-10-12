@@ -904,7 +904,10 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   },
   {
     title: 'Your situation',
-    fields: ['Why you need this scholarship', 'What you want to study', 'Also interested in'],
+    fields: [
+      'Why you need this scholarship', 'What you want to study', 'Also interested in',
+      'How did you hear about this scholarship',
+    ],
   },
 ]
 

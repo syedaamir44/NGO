@@ -98,7 +98,7 @@ const AWARD = [
   {
     k: 'How it is paid',
     v: 'Bank transfer',
-    note: 'By NEFT into the scholar’s own account. First instalment on 1 January 2027, second on 1 May 2027.',
+    note: 'By NEFT into the scholar’s own account. First instalment on 20 March 2027, second on 1 May 2027.',
   },
 ]
 

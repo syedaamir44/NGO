@@ -14,6 +14,7 @@ import RequestPage from './pages/RequestPage'
 import PartnerPage from './pages/PartnerPage'
 import SponsorPage from './pages/SponsorPage'
 import MentorPage from './pages/MentorPage'
+import { Analytics } from '@vercel/analytics/react'
 import { useHashRoute, SERVICE_PAGES, type ServiceKey } from './lib/useHashRoute'
 
 function Home() {
@@ -49,6 +50,7 @@ export default function App() {
       </main>
       <Footer />
       <AnnouncementModal />
+      <Analytics />
     </div>
   )
 }

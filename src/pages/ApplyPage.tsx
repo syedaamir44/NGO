@@ -263,7 +263,7 @@ export default function ApplyPage() {
 
                 <Fieldset
                   legend="Teacher reference"
-                  note="Give one teacher who knows your work and can speak for you. We may call them for a short reference during shortlisting."
+                  note="Give one teacher reference who knows you and can speak for you. We may call them for a short reference during shortlisting."
                 >
                   <Grid2>
                     <TextField
@@ -272,7 +272,7 @@ export default function ApplyPage() {
                       label="Teacher’s name"
                       required
                       placeholder="Full name of the teacher"
-                      hint="A teacher from your school or college who knows your work"
+                      hint="A teacher from your college who knows you"
                     />
                     <TextField
                       name="Reference teacher mobile"
@@ -494,6 +494,24 @@ export default function ApplyPage() {
                     it where it is needed. Asking has no effect, positive or negative, on your
                     scholarship application.
                   </p>
+                  <SelectField
+                    full
+                    name="How did you hear about this scholarship"
+                    label="How did you hear about this scholarship?"
+                    required
+                    options={[
+                      'School or college',
+                      'A teacher',
+                      'Friend or family',
+                      'Instagram',
+                      'WhatsApp',
+                      'Facebook',
+                      'Newspaper or magazine',
+                      'An NGO or community organisation',
+                      'Internet search or website',
+                      'Other',
+                    ]}
+                  />
                 </Fieldset>
               </div>
 
