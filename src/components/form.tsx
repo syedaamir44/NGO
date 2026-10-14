@@ -248,6 +248,17 @@ const EXAMS_BY_STREAM: Record<string, string[]> = {
 }
 
 /**
+ * Example degrees shown as the placeholder for "Which degree would you pursue?",
+ * chosen by the stream selected above so the hint stays relevant.
+ */
+const DEGREE_HINT_BY_STREAM: Record<string, string> = {
+  Science: 'e.g. B.Sc, B.E / B.Tech, MBBS, BCA',
+  Commerce: 'e.g. B.Com, BBA, BCA',
+  'Arts / Humanities': 'e.g. BA, BFA, LLB, BSW',
+  Other: 'e.g. the degree you plan to pursue',
+}
+
+/**
  * The whole academic section, which adapts to the class the student is in.
  *
  * A class 11 student gives their present (class 11) details plus class 10, and
@@ -306,6 +317,17 @@ export function AcademicSection() {
           name="Competitive exam (other)"
           label={examLabel}
           placeholder="Name the exam, or write ‘not decided yet’"
+        />
+      )}
+
+      {stream && (
+        <TextField
+          full
+          name="What you want to study"
+          label="Which degree would you pursue?"
+          required
+          placeholder={DEGREE_HINT_BY_STREAM[stream] || 'e.g. the degree you plan to pursue'}
+          hint="The degree you are aiming for — a short answer is enough"
         />
       )}
 
@@ -882,8 +904,8 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   {
     title: 'Academic details',
     fields: [
-      'Current class', 'Present college', 'Board', 'Stream', 'Competitive exams',
-      'Competitive exam (other)', 'Class 11 college', 'Class 11 percentage',
+      'Current class', 'Present college', 'Board', 'Stream', 'What you want to study',
+      'Competitive exams', 'Competitive exam (other)', 'Class 11 college', 'Class 11 percentage',
       'Class 10 school', 'Class 10 board', 'Class 10 year of passing', 'Class 10 register number', 'Class 10 percentage',
       'Reference teacher name', 'Reference teacher mobile',
     ],
@@ -905,7 +927,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   {
     title: 'Your situation',
     fields: [
-      'Why you need this scholarship', 'What you want to study', 'Also interested in',
+      'Why you need this scholarship', 'Also interested in',
       'How did you hear about this scholarship',
     ],
   },

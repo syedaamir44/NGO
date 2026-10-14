@@ -473,12 +473,6 @@ export default function ApplyPage() {
                     required
                     placeholder="What the fees mean for your family, and what would happen without support."
                   />
-                  <TextAreaField
-                    name="What you want to study"
-                    label="What do you want to study, and why?"
-                    required
-                    placeholder="The course or career you are aiming for, and what drew you to it."
-                  />
                   <ChoiceGroup
                     name="Also interested in"
                     label="Would you also like us to arrange any of these while your application is assessed?"
