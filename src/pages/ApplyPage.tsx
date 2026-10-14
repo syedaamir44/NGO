@@ -19,6 +19,7 @@ import {
   useEifForm,
 } from '../components/form'
 import { CONTACT_EMAIL, PROGRAMME } from '../config'
+import { TERMS } from './ScholarshipPage'
 
 const EDUCATION_LEVELS = [
   'No formal education',
@@ -44,11 +45,83 @@ const STEP_LABELS = [
   'Review & submit',
 ]
 
+/**
+ * Policy gate shown before the application form. The applicant must read the
+ * scholarship policy and tick the acknowledgement; only then does the
+ * "Proceed to the application form" button enable and reveal the form.
+ */
+function PolicyGate({ onAccept }: { onAccept: () => void }) {
+  const [ack, setAck] = useState(false)
+  return (
+    <div>
+      <h2 className="font-serif font-normal text-2xl text-ink-deep">
+        Scholarship policy — please read before you apply
+      </h2>
+      <p className="mt-2 mb-5 text-sm text-muted leading-relaxed">
+        Applying is free of cost — there is no application, processing or any other fee at any
+        stage. Please read the policy and rules below. You can open the application form once you
+        have read and accepted them.
+      </p>
+
+      <div className="max-h-[380px] overflow-y-auto border-[1.5px] border-line rounded-sm bg-[#F8F5EE] p-4 sm:p-5">
+        <div className="font-serif text-[1.05rem] text-ink-deep border-b border-ink pb-1.5 mb-3">
+          {PROGRAMME.name} — policy and rules
+        </div>
+        <ol className="list-decimal pl-5 space-y-2.5">
+          {TERMS.map((t) => (
+            <li key={t} className="text-[14px] text-muted leading-relaxed pl-1">
+              {t}
+            </li>
+          ))}
+        </ol>
+        <p className="mt-4 pt-3 border-t border-line text-[13px] text-muted leading-relaxed">
+          The Foundation makes no charge at any stage and takes no payment on this website. If
+          anyone asks you for money in our name, do not pay — write to{' '}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-forest2 underline break-all">
+            {CONTACT_EMAIL}
+          </a>
+          .
+        </p>
+      </div>
+
+      <label className="mt-5 flex items-start gap-3 p-3.5 border-[1.5px] border-line rounded-sm cursor-pointer bg-cream">
+        <input
+          type="checkbox"
+          checked={ack}
+          onChange={(e) => setAck(e.currentTarget.checked)}
+          className="w-5 h-5 mt-0.5 shrink-0 accent-[#12403A]"
+        />
+        <span className="text-[15px] text-ink leading-snug">
+          I have read and understood the scholarship policy and rules above, and I accept them.
+        </span>
+      </label>
+
+      <div className="mt-6">
+        <button
+          type="button"
+          disabled={!ack}
+          onClick={onAccept}
+          className="inline-flex items-center justify-center px-7 py-3.5 min-h-[52px] text-sm font-medium rounded-lg bg-ink text-cream hover:bg-ink-deep transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Proceed to the application form →
+        </button>
+        {!ack && (
+          <p className="mt-2 text-[0.83rem] text-muted">
+            Tick the box above to open the application form.
+          </p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function ApplyPage() {
   const { formRef, submitted, delivered, busy, reference, submittedData, onSubmit, onInput } =
     useEifForm('apply')
   const [step, setStep] = useState(0)
   const [previewData, setPreviewData] = useState<Record<string, string>>({})
+  // The scholarship policy must be read and accepted before the form opens.
+  const [agreed, setAgreed] = useState(false)
   const total = STEP_LABELS.length
 
   // Collect everything typed so far (across all mounted steps) for the preview.
@@ -118,6 +191,8 @@ export default function ApplyPage() {
               .
             </p>
           </SuccessPanel>
+        ) : !agreed ? (
+          <PolicyGate onAccept={() => { setAgreed(true); window.scrollTo({ top: 0, behavior: 'smooth' }) }} />
         ) : (
           <>
             <SetupNotice formKey="apply" />

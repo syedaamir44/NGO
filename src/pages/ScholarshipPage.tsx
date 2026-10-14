@@ -102,7 +102,7 @@ const AWARD = [
   },
 ]
 
-const TERMS = [
+export const TERMS = [
   'Selection is on merit — the percentage of marks obtained, and an interview where applicable.',
   'If two candidates tie on marks, the one with the lower family income is preferred. If both are still tied, a financial assessment by the Foundation decides.',
   'As a rule, only one student per family receives the scholarship. This may be relaxed to two if the later applicant is female, or if both applicants are female.',
