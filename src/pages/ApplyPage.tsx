@@ -6,6 +6,7 @@ import {
   TextField,
   SelectField,
   AcademicSection,
+  DegreeField,
   TextAreaField,
   ChoiceGroup,
   SetupNotice,
@@ -49,6 +50,9 @@ export default function ApplyPage() {
     useEifForm('apply')
   const [step, setStep] = useState(0)
   const [previewData, setPreviewData] = useState<Record<string, string>>({})
+  // Lifted so the degree field (after the teacher reference) can show a
+  // stream-aware example watermark using the stream chosen in AcademicSection.
+  const [stream, setStream] = useState('')
   const total = STEP_LABELS.length
 
   // Collect everything typed so far (across all mounted steps) for the preview.
@@ -258,7 +262,7 @@ export default function ApplyPage() {
                   legend="Academic details"
                   note="Tell us the class you are in now, and the rest of the section adjusts to it. Every name, number and percentage should match your marksheets exactly."
                 >
-                  <AcademicSection />
+                  <AcademicSection stream={stream} setStream={setStream} />
                 </Fieldset>
 
                 <Fieldset
@@ -285,6 +289,10 @@ export default function ApplyPage() {
                       placeholder="10-digit number"
                     />
                   </Grid2>
+                </Fieldset>
+
+                <Fieldset legend="Your degree">
+                  <DegreeField stream={stream} />
                 </Fieldset>
               </div>
 
@@ -472,6 +480,12 @@ export default function ApplyPage() {
                     label="Why do you need this scholarship?"
                     required
                     placeholder="What the fees mean for your family, and what would happen without support."
+                  />
+                  <TextAreaField
+                    name="Ambition"
+                    label="What is your ambition?"
+                    required
+                    placeholder="In a line or two — what you hope to become or achieve."
                   />
                   <ChoiceGroup
                     name="Also interested in"

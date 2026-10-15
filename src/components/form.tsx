@@ -267,9 +267,14 @@ const DEGREE_HINT_BY_STREAM: Record<string, string> = {
  * fields never appear for a class 11 student. All state is local; every input
  * it renders is collected by the form's FormData by its `name`.
  */
-export function AcademicSection() {
+export function AcademicSection({
+  stream,
+  setStream,
+}: {
+  stream: string
+  setStream: (v: string) => void
+}) {
   const [currentClass, setCurrentClass] = useState('')
-  const [stream, setStream] = useState('')
   const is11 = currentClass === 'Class 11'
   const is12 = currentClass === 'Class 12'
   const exams = EXAMS_BY_STREAM[stream]
@@ -317,17 +322,6 @@ export function AcademicSection() {
           name="Competitive exam (other)"
           label={examLabel}
           placeholder="Name the exam, or write ‘not decided yet’"
-        />
-      )}
-
-      {stream && (
-        <TextField
-          full
-          name="What you want to study"
-          label="Which degree would you pursue?"
-          required
-          placeholder={DEGREE_HINT_BY_STREAM[stream] || 'e.g. the degree you plan to pursue'}
-          hint="The degree you are aiming for — a short answer is enough"
         />
       )}
 
@@ -407,6 +401,26 @@ export function AcademicSection() {
           />
         </>
       )}
+    </Grid2>
+  )
+}
+
+/**
+ * The "which degree" question. Shown after the teacher reference, still on the
+ * Academics step, with a stream-aware example watermark. Its name is unchanged
+ * ("What you want to study") so it keeps mapping to the what_to_study column.
+ */
+export function DegreeField({ stream }: { stream: string }) {
+  return (
+    <Grid2>
+      <TextField
+        full
+        name="What you want to study"
+        label="Which degree would you pursue?"
+        required
+        placeholder={DEGREE_HINT_BY_STREAM[stream] || 'e.g. the degree you plan to pursue'}
+        hint="The degree you are aiming for — a short answer is enough"
+      />
     </Grid2>
   )
 }
@@ -927,7 +941,7 @@ const ACK_GROUPS: { title: string; fields: string[] }[] = [
   {
     title: 'Your situation',
     fields: [
-      'Why you need this scholarship', 'Also interested in',
+      'Why you need this scholarship', 'Ambition', 'Also interested in',
       'How did you hear about this scholarship',
     ],
   },
