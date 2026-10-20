@@ -537,8 +537,8 @@ export default function ApplyPage() {
                     choices={[
                       {
                         value: 'Agreed',
-                        title: 'I confirm the above details are true',
-                        note: 'I understand that applying is free of cost, that my details will be verified against my original documents, that selection is decided on merit and need through a published process, and that any scholarship awarded is to be used for my education. I give Shiksha Sarathi Foundation authorisation to use the data I have submitted to process this application. I understand that false information will disqualify my application.',
+                        title: 'I have read and accept this declaration',
+                        note: 'I confirm that the information and documents I have provided are true, complete and my own, and I understand they will be verified against my original documents. I understand that applying is free of cost and that no one is authorised to collect money in the Foundation’s name. I understand that selection is decided on merit and financial need through a published process, and that the decision of the Foundation is final. I consent to Shiksha Sarathi Foundation collecting and using the details I have submitted solely to assess and administer this scholarship, including sharing them — only where necessary for verification — with its team, selection committee and implementation partner. My details will be stored securely, will not be sold or used for unrelated marketing, and I agree to be contacted by phone, email or WhatsApp about this application. I understand that any false or misleading information will disqualify my application and may lead to cancellation of any scholarship awarded.',
                       },
                     ]}
                   />

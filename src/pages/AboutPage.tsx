@@ -66,13 +66,25 @@ const GET_INVOLVED = [
     title: 'Students',
     body: 'Apply for the scholarship if the fees are what stands in your way, or send us a request if you simply do not know what to do next. Both cost nothing to ask.',
     cta: 'Apply for the scholarship →',
-    href: '/apply',
+    href: '/scholarship',
   },
   {
     title: 'Schools, colleges and NGOs',
     body: 'Partner with us. It costs your organisation nothing, and you are the people who see these students first.',
     cta: 'Become a partner →',
     href: '/partner',
+  },
+  {
+    title: 'Sponsors',
+    body: 'Fund a scholar directly. A contribution goes to the scholarship award pool, paid into a scholar’s own bank account. No payment is taken on this site — tell us how you would like to help.',
+    cta: 'Donate / support us →',
+    href: '/sponsor',
+  },
+  {
+    title: 'Volunteers',
+    body: 'If you are a student at a partner school or college, help us reach and support your peers — spread the word on campus, help at our sessions and guide your juniors through applying.',
+    cta: 'Volunteer with us →',
+    href: '/volunteer',
   },
 ]
 
@@ -107,7 +119,7 @@ export default function AboutPage() {
             <p className="mt-4 text-base text-muted leading-relaxed">
               We exist to change how those questions are answered, and we do it in two ways. We fund
               merit scholarships for students who cannot meet the cost of continuing their education
-              after class 12. And we arrange the guidance that tells a student what to study, where
+              after class 12. And we provide the guidance that tells a student what to study, where
               it leads, which entrance examination is worth sitting, and which course is worth paying
               for.
             </p>
@@ -120,7 +132,7 @@ export default function AboutPage() {
                 ['Legal status', 'Section 8 non-profit company', 'Companies Act, 2013'],
                 ['Based in', 'Bangalore, Karnataka', 'Scholarship open across Karnataka'],
                 ['What we fund', 'Merit scholarships', 'Awarded on merit and need'],
-                ['What we arrange', 'Four guidance services', 'With expert partners'],
+                ['What we provide', 'Four guidance services', 'With expert partners'],
                 ['Cost to apply', '₹0', 'The scholarship is free to apply for'],
               ].map(([k, v, note], i) => (
                 <div
@@ -184,7 +196,7 @@ export default function AboutPage() {
       <section className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 py-12 sm:py-16">
         <Label>What we do</Label>
         <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
-          One scholarship we fund, and four services we arrange
+          One scholarship we fund, and four services we provide
         </h2>
 
         <div className="mt-8 border-t border-line">
@@ -208,7 +220,7 @@ export default function AboutPage() {
         </div>
 
         <p className="mt-6 max-w-3xl text-[15px] text-muted leading-relaxed">
-          The four guidance services are arranged with expert partner mentors and institutes who
+          The four guidance services are provided through expert partner mentors and institutes who
           specialise in each area. They set their own fees, we tell a student the cost
           before anything is booked, and where a family cannot meet it we arrange a concession, a
           discount or full sponsorship.
@@ -286,10 +298,10 @@ export default function AboutPage() {
       <section className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 py-12 sm:py-16">
         <Label>Get involved</Label>
         <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl text-ink-deep">
-          Three ways in
+          Four ways in
         </h2>
 
-        <div className="mt-8 grid gap-8 md:grid-cols-3 md:gap-9">
+        <div className="mt-8 grid gap-8 sm:grid-cols-2 md:gap-9">
           {GET_INVOLVED.map((g) => (
             <div key={g.title} className="flex flex-col">
               <h3 className="inline-block self-start font-serif text-lg text-ink-deep border-b-2 border-marigold pb-2.5">

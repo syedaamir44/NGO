@@ -26,7 +26,7 @@
  */
 export const HERO_IMAGE_URL = ''
 
-export type FormKey = 'apply' | 'request' | 'partner' | 'sponsor' | 'mentor'
+export type FormKey = 'apply' | 'request' | 'partner' | 'sponsor' | 'mentor' | 'volunteer'
 
 /**
  * THE FORMS — wired to Supabase.
@@ -58,6 +58,7 @@ export const FORM_ENDPOINTS: Record<FormKey, string> = {
   partner: `${SUBMIT_FN}?form=partner`,
   sponsor: `${SUBMIT_FN}?form=sponsor`,
   mentor: `${SUBMIT_FN}?form=mentor`,
+  volunteer: `${SUBMIT_FN}?form=volunteer`,
 }
 
 export const CONTACT_EMAIL = 'connect@shikshasarathifoundation.org'

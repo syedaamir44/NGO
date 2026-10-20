@@ -13,6 +13,7 @@ export const PAGES = [
   'partner',
   'sponsor',
   'mentor',
+  'volunteer',
 ] as const
 
 export type PageName = (typeof PAGES)[number]
@@ -103,6 +104,11 @@ export const META: Record<PageName, { title: string; description: string }> = {
     title: 'Become a Mentor — Shiksha Sarathi Foundation',
     description:
       'Give a little of your free time to guide a student. Tell us how you can help and the team will get in touch.',
+  },
+  volunteer: {
+    title: 'Volunteer With Us — Shiksha Sarathi Foundation',
+    description:
+      'Students from our partner schools and colleges can help us reach and support their peers. Tell us how you can help and the team will get in touch.',
   },
 }
 

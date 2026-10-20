@@ -14,6 +14,7 @@ import RequestPage from './pages/RequestPage'
 import PartnerPage from './pages/PartnerPage'
 import SponsorPage from './pages/SponsorPage'
 import MentorPage from './pages/MentorPage'
+import VolunteerPage from './pages/VolunteerPage'
 import { Analytics } from '@vercel/analytics/react'
 import { useHashRoute, SERVICE_PAGES, type ServiceKey } from './lib/useHashRoute'
 
@@ -47,6 +48,7 @@ export default function App() {
         {page === 'partner' && <PartnerPage />}
         {page === 'sponsor' && <SponsorPage />}
         {page === 'mentor' && <MentorPage />}
+        {page === 'volunteer' && <VolunteerPage />}
       </main>
       <Footer />
       <AnnouncementModal />

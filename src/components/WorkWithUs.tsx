@@ -37,6 +37,15 @@ const BLOCKS = [
     cta: 'Mentor a student →',
     href: '/mentor',
   },
+  {
+    title: 'Volunteer with us',
+    paras: [
+      'Are you a student at one of our partner schools or colleges? You are closest to the students who need us — spread the word on campus, help at our sessions, and guide your juniors through applying.',
+      'Tell us how you can help and how much time you can spare, and we will get you started.',
+    ],
+    cta: 'Volunteer with us →',
+    href: '/volunteer',
+  },
 ]
 
 export default function WorkWithUs() {
@@ -44,7 +53,7 @@ export default function WorkWithUs() {
     <Section className="bg-ink text-[#E7DECC]">
       <Label tone="light">Work with us</Label>
       <h2 className="mt-4 font-serif font-normal text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tight text-white">
-        Four ways to help a student before the decision is made
+        Five ways to help a student before the decision is made
       </h2>
 
       <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-9">

@@ -70,6 +70,9 @@ export default function Footer() {
             <a href="/mentor" className={LINK}>
               Become a mentor
             </a>
+            <a href="/volunteer" className={LINK}>
+              Volunteer with us
+            </a>
             <a href="/about" className={LINK}>
               About us
             </a>

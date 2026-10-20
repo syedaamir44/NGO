@@ -138,16 +138,36 @@ export function TextField({
 }) {
   const id = `f-${name.replace(/\W+/g, '-').toLowerCase()}`
   const listId = suggestions ? `${id}-list` : undefined
-  // Keep a digits-only field digits-only as the person types, and enforce the
-  // length cap on paste as well as on keystroke.
-  const filterDigits = numeric
-    ? (e: React.FormEvent<HTMLInputElement>) => {
-        const el = e.currentTarget
-        let v = el.value.replace(/\D+/g, '')
-        if (maxLength) v = v.slice(0, maxLength)
-        if (v !== el.value) el.value = v
-      }
-    : undefined
+  // Plain text fields are forced to UPPERCASE as the person types (and the
+  // stored value is uppercase too). Email, numbers, dates and phone are left
+  // exactly as entered.
+  const upper = type === 'text'
+  // Keep a digits-only field digits-only as the person types (enforcing the
+  // length cap on paste as well as keystroke), and uppercase text fields live
+  // while preserving the caret position.
+  const handleInput =
+    numeric || upper
+      ? (e: React.FormEvent<HTMLInputElement>) => {
+          const el = e.currentTarget
+          if (numeric) {
+            let v = el.value.replace(/\D+/g, '')
+            if (maxLength) v = v.slice(0, maxLength)
+            if (v !== el.value) el.value = v
+          } else if (upper) {
+            const up = el.value.toUpperCase()
+            if (up !== el.value) {
+              const s = el.selectionStart
+              const en = el.selectionEnd
+              el.value = up
+              try {
+                if (s !== null && en !== null) el.setSelectionRange(s, en)
+              } catch {
+                /* some input types disallow setSelectionRange */
+              }
+            }
+          }
+        }
+      : undefined
   return (
     <FieldShell full={full}>
       <FieldLabel htmlFor={id} required={required} hint={hint}>
@@ -165,10 +185,10 @@ export function TextField({
         step={step}
         maxLength={numeric ? undefined : maxLength}
         inputMode={inputMode || (numeric ? 'numeric' : undefined)}
-        onInput={filterDigits}
+        onInput={handleInput}
         data-rule={rule}
         list={listId}
-        style={style}
+        style={{ ...(upper ? { textTransform: 'uppercase' as const } : {}), ...style }}
         className={CONTROL}
       />
       {suggestions && (
@@ -427,6 +447,21 @@ export function DegreeField({ stream }: { stream: string }) {
 
 export function TextAreaField({ name, label, hint, required, full, placeholder }: BaseProps & { placeholder?: string }) {
   const id = `f-${name.replace(/\W+/g, '-').toLowerCase()}`
+  // Uppercase as the person types, keeping the caret in place, and store uppercase.
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const el = e.currentTarget
+    const up = el.value.toUpperCase()
+    if (up !== el.value) {
+      const s = el.selectionStart
+      const en = el.selectionEnd
+      el.value = up
+      try {
+        el.setSelectionRange(s, en)
+      } catch {
+        /* ignore */
+      }
+    }
+  }
   return (
     <FieldShell full={full}>
       <FieldLabel htmlFor={id} required={required} hint={hint}>
@@ -437,6 +472,8 @@ export function TextAreaField({ name, label, hint, required, full, placeholder }
         name={name}
         required={required}
         placeholder={placeholder}
+        onInput={handleInput}
+        style={{ textTransform: 'uppercase' }}
         className={`${CONTROL} min-h-[110px] resize-y`}
       />
     </FieldShell>
