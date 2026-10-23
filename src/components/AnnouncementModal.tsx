@@ -82,7 +82,7 @@ export default function AnnouncementModal() {
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a
-              href="/apply"
+              href="/scholarship"
               onClick={close}
               className="inline-flex items-center justify-center px-6 py-3 min-h-[48px] text-sm font-medium rounded-lg bg-ink text-cream hover:bg-ink-deep transition-colors duration-200"
             >

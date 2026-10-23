@@ -911,6 +911,17 @@ export function useEifForm(key: FormKey) {
           headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
           body: JSON.stringify(data),
         })
+        // A duplicate application (same mobile number or email) is rejected by
+        // the server with 409 — show a clear message rather than a generic error.
+        if (res.status === 409) {
+          const payload = await res.json().catch(() => null)
+          setBusy(false)
+          window.alert(
+            (payload && typeof payload.message === 'string' && payload.message) ||
+              'An application with this mobile number or email has already been received. Each student can apply only once.',
+          )
+          return
+        }
         if (!res.ok) throw new Error(`Server returned ${res.status}`)
         ok = true
         const payload = await res.json().catch(() => null)

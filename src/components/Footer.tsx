@@ -55,7 +55,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-serif text-[1.02rem] text-white mb-2">Get involved</h4>
-            <a href="/apply" className={LINK}>
+            <a href="/scholarship" className={LINK}>
               Apply for a scholarship
             </a>
             <a href="/request" className={LINK}>
