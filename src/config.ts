@@ -52,6 +52,9 @@ export type FormKey = 'apply' | 'request' | 'partner' | 'sponsor' | 'mentor' | '
  */
 const SUBMIT_FN = 'https://poxdogbtrhebpfzxhlvy.supabase.co/functions/v1/submit-form'
 
+/** "Find my application" — looks up by registered email and emails the ID back. */
+export const RECOVER_ENDPOINT = 'https://poxdogbtrhebpfzxhlvy.supabase.co/functions/v1/recover-application'
+
 export const FORM_ENDPOINTS: Record<FormKey, string> = {
   apply: `${SUBMIT_FN}?form=apply`,
   request: `${SUBMIT_FN}?form=request`,

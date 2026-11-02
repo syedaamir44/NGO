@@ -58,6 +58,9 @@ export default function Footer() {
             <a href="/scholarship" className={LINK}>
               Apply for a scholarship
             </a>
+            <a href="/find-application" className={LINK}>
+              Find my application
+            </a>
             <a href="/request" className={LINK}>
               Request a session
             </a>

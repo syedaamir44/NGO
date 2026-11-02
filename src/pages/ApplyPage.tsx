@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { loadDraft, saveDraft, clearDraft, restoreDraft } from '../lib/applyDraft'
 import {
   PageHeader,
   Fieldset,
@@ -55,6 +56,44 @@ export default function ApplyPage() {
   const [stream, setStream] = useState('')
   const total = STEP_LABELS.length
 
+  // --- Offline draft autosave (saved on this device, cleared on submit) ---
+  const [draftRestored, setDraftRestored] = useState(false)
+  const didRestore = useRef(false)
+  const stepRef = useRef(step)
+  stepRef.current = step
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const scheduleSave = () => {
+    if (saveTimer.current) clearTimeout(saveTimer.current)
+    saveTimer.current = setTimeout(() => saveDraft(formRef.current, stepRef.current), 500)
+  }
+
+  // Restore a saved draft once, on first mount.
+  useEffect(() => {
+    if (didRestore.current) return
+    didRestore.current = true
+    const form = formRef.current
+    if (!form) return
+    const d = loadDraft()
+    if (d) {
+      restoreDraft(form, d)
+      if (typeof d.step === 'number') setStep(Math.min(Math.max(d.step, 0), STEP_LABELS.length - 1))
+      setDraftRestored(true)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Clear the draft once the application is successfully submitted.
+  useEffect(() => {
+    if (submitted) clearDraft()
+  }, [submitted])
+
+  // Save answers, and also clear any field error, as the student types.
+  const onFormInput = (e: React.FormEvent<HTMLFormElement>) => {
+    onInput(e)
+    scheduleSave()
+  }
+
   // Collect everything typed so far (across all mounted steps) for the preview.
   const collect = () => {
     const form = formRef.current
@@ -74,10 +113,13 @@ export default function ApplyPage() {
     const next = Math.min(step + 1, total - 1)
     if (next === total - 1) setPreviewData(collect())
     setStep(next)
+    saveDraft(formRef.current, next)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
   const goBack = () => {
-    setStep((s) => Math.max(s - 1, 0))
+    const prev = Math.max(step - 1, 0)
+    setStep(prev)
+    saveDraft(formRef.current, prev)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -114,6 +156,14 @@ export default function ApplyPage() {
               programme={PROGRAMME.name}
             />
             <p className="mt-5 text-[15px] text-muted leading-relaxed">
+              A copy of your Application ID has also been emailed to the address you gave — keep it
+              safe. If you ever lose it, you can{' '}
+              <a href="/find-application" className="text-forest2 underline">
+                find your application here
+              </a>
+              .
+            </p>
+            <p className="mt-3 text-[15px] text-muted leading-relaxed">
               Keep the documents listed on the scholarship page ready — verification moves quickly
               once shortlisting is done. Questions in the meantime? Write to{' '}
               <a href={`mailto:${CONTACT_EMAIL}`} className="text-forest2 underline break-all">
@@ -126,14 +176,35 @@ export default function ApplyPage() {
           <>
             <SetupNotice formKey="apply" />
 
-            <h2 className="font-serif font-normal text-2xl text-ink-deep">Application form</h2>
-            <p className="mt-2 mb-8 text-sm text-muted leading-relaxed">
-              Fields marked <Req /> are required. Your answers are saved as you move between steps —
-              use Back any time to change something. Everything you tell us is used only to assess
-              this application.
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h2 className="font-serif font-normal text-2xl text-ink-deep">Application form</h2>
+              <a href="/find-application" className="text-[0.86rem] text-forest2 underline">
+                Already applied? Find your Application ID
+              </a>
+            </div>
+            <p className="mt-2 mb-6 text-sm text-muted leading-relaxed">
+              Fields marked <Req /> are required. Your answers are saved on this device as you go, so
+              a lost connection or an accidental refresh will not wipe your progress. Everything you
+              tell us is used only to assess this application.
             </p>
 
-            <form ref={formRef} onSubmit={onSubmit} onInput={onInput} onChange={onInput} noValidate>
+            {draftRestored && (
+              <div className="mb-7 flex flex-wrap items-center justify-between gap-3 bg-[#F0F6F2] border-[1.5px] border-forest2/30 rounded-sm px-4 py-3 text-sm text-ink">
+                <span>We restored the details you had started earlier on this device.</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    clearDraft()
+                    window.location.reload()
+                  }}
+                  className="underline text-forest2 hover:text-ink"
+                >
+                  Start a fresh form
+                </button>
+              </div>
+            )}
+
+            <form ref={formRef} onSubmit={onSubmit} onInput={onFormInput} onChange={onFormInput} noValidate>
               <input
                 type="hidden"
                 name="_form"
