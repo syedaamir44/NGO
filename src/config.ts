@@ -79,9 +79,9 @@ export const PROGRAMME = {
   short: 'SSM Scholarship',
   cycle: '2026–27',
   opens: '1 October 2026',
-  closes: '15 November 2026',
+  closes: '31 December 2026',
   /** Short form used in the announcement bar and receipts. */
-  window: '1 October – 15 November 2026',
+  window: '1 October – 31 December 2026',
 }
 
 /**
